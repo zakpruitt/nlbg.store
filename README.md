@@ -4,6 +4,7 @@ A web application that facilitates Next Level Billiards Gear buying/selling serv
 # Technology Used
 * Java
 * Spring Boot
+* HTML/CSS/JS
 * Bootstrap 5
 * MySQL
 * SQLite
