@@ -7,3 +7,4 @@ A web application that facilitates Next Level Billiards Gear buying/selling serv
 * Bootstrap 5
 * MySQL
 * SQLite
+* Heroku
