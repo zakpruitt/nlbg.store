@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Category {
+public class Category extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long categoryId;
