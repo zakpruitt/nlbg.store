@@ -23,7 +23,7 @@ public class Category extends AuditModel {
     @NotEmpty(message = "Item Name is required.")
     private String categoryName;
     @NotNull
-    private double categoryDescription;
+    private String categoryDescription;
     @Nullable
     @OneToMany(mappedBy = "categoryId", cascade = CascadeType.ALL)
     private Set items = new HashSet<>();
