@@ -1,5 +1,6 @@
 package com.nlbg.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,14 +18,15 @@ import java.util.Set;
 @Entity
 public class Category extends AuditModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long categoryId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotEmpty(message = "Item Name is required.")
     private String categoryName;
     @NotNull
     private String categoryDescription;
     @Nullable
-    @OneToMany(mappedBy = "categoryId", cascade = CascadeType.ALL)
-    private Set items = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Item> items;
 }

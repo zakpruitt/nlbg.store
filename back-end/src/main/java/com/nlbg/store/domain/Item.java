@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Item extends AuditModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long itemId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotEmpty(message = "Item Name is required.")
     private String itemName;
@@ -30,8 +30,8 @@ public class Item extends AuditModel {
     @NotNull
     private int quantityBought;
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "column_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     @PostConstruct

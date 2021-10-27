@@ -24,20 +24,24 @@ public class ItemConfig {
     @Bean
     CommandLineRunner itemRunner(ItemRepository itemRepository) {
         return args -> {
-            if (env.equals("db-dev")) {
-                Category category = new Category();
-                category.setCategoryName("Cue");
-                category.setCategoryDescription("This category contains all items relating to billiard cues. This includes yada, yadada, and yada.");
 
-                Item item = new Item();
-                item.setItemName("Lightning Test Cue");
-                item.setItemAverageValue(645.43);
-                item.setItemDesiredValue(700);
+            System.out.println("true");
+            Category category = new Category();
+            category.setCategoryName("Cue");
+            category.setCategoryDescription("This category contains all items relating to billiard cues. This includes yada, yadada, and yada.");
+            categoryRepository.save(category);
 
-                category.getItems().add(item);
+            Item item = new Item();
+            item.setItemName("Lightning Test Cue");
+            item.setItemAverageValue(645.43);
+            item.setItemDesiredValue(700);
+            item.setCategory(category);
 
-                categoryRepository.save(category);
-            }
+            itemRepository.save(item);
+
+
+
+
         };
     }
 
