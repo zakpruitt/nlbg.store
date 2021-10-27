@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -20,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Item extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long itemId;
 
     @NotEmpty(message = "Item Name is required.")
     private String itemName;
@@ -32,6 +29,10 @@ public class Item extends AuditModel {
     private int quantitySold;
     @NotNull
     private int quantityBought;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "column_id")
+    private Category category;
 
     @PostConstruct
     private void setQuantities() {
