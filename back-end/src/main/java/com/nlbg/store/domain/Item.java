@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Item extends AuditModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotEmpty(message = "Item Name is required.")
@@ -34,9 +34,16 @@ public class Item extends AuditModel {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+    public Item(String itemName, double itemDesiredValue, Category category) {
+        this.itemName = itemName;
+        this.itemDesiredValue = itemDesiredValue;
+        this.category = category;
+    }
+
     @PostConstruct
     private void setQuantities() {
         this.quantitySold = 0;
         this.quantityBought = 0;
+        this.itemAverageValue = 0;
     }
 }

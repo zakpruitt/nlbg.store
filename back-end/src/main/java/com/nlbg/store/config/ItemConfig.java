@@ -26,26 +26,20 @@ public class ItemConfig {
         return args -> {
 
             System.out.println("true");
-            Category category = new Category();
-            category.setCategoryName("Cue");
-            category.setCategoryDescription("This category contains all items relating to billiard cues. This includes yada, yadada, and yada.");
-            categoryRepository.save(category);
+            Category cueCategory = new Category
+                    ("Cues",
+                     "This category contains all items relating to billiard cues. This includes yada, yadada, and yada."
+                    );
+            categoryRepository.save(cueCategory);
 
-            Item item = new Item();
-            item.setItemName("Lightning Test Cue");
-            item.setItemAverageValue(645.43);
-            item.setItemDesiredValue(700);
-            item.setCategory(category);
+            Item item = new Item("Test Cue1", 7001, cueCategory);
+            Item item1 = new Item("Test Cue2", 7020, cueCategory);
+            Item item2 = new Item("Test Cue3", 7030, cueCategory);
 
             itemRepository.save(item);
-
-
-
+            itemRepository.save(item1);
+            itemRepository.save(item2);
 
         };
-    }
-
-    private void CreateItem() {
-
     }
 }
