@@ -24,24 +24,18 @@ public class ItemConfig {
     @Bean
     CommandLineRunner itemRunner() {
         return args -> {
+            Category jumpCueCategory = categoryRepository.findByCategoryName("Jump Cues");
+            Category breakCueCategory = categoryRepository.findByCategoryName("Break Cues");
 
 
-//
-//            Item item = new Item("Test Cue1", 7001, cueCategory);
-//            Item item1 = new Item("Test Cue2", 7020, cueCategory);
-//            Item item2 = new Item("Test Cue3", 7030, cueCategory);
-//
-//
-//            itemRepository.save(item);
-//            itemRepository.save(item1);
-//            itemRepository.save(item2);
-
+            Item airRush = new Item("Air Rush", 600.00, jumpCueCategory);
+            CreateItemWithCheck(airRush);
         };
     }
 
-    private void CreateItemWithCheck(Category newCategory) {
-        if (categoryRepository.findByCategoryName(newCategory.getCategoryName()) == null) {
-            categoryRepository.save(newCategory);
+    private void CreateItemWithCheck(Item newItem) {
+        if (itemRepository.findByItemName(newItem.getItemName()) == null) {
+            itemRepository.save(newItem);
         }
     }
 }
