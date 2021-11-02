@@ -10861,19 +10861,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80");
+  background: url("../img/NLBGLogo.png");
   background-position: center ;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80");
+  background: url("../img/NLBGLogo.png");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80");
+  background: url("../img/NLBGLogo.png");
   background-position: center;
   background-size: cover;
 }
