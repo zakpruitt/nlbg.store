@@ -1,10 +1,5 @@
 package com.nlbg.store;
 
-import com.nlbg.store.domain.API;
-import com.nlbg.store.domain.Item;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;

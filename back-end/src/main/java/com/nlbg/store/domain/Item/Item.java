@@ -1,5 +1,6 @@
-package com.nlbg.store.domain;
+package com.nlbg.store.domain.Item;
 
+import com.nlbg.store.domain.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
