@@ -22,24 +22,20 @@ public class ItemConfig {
     private String env;
 
     @Bean
-    CommandLineRunner itemRunner(ItemRepository itemRepository) {
+    CommandLineRunner itemRunner() {
         return args -> {
+            Category jumpCueCategory = categoryRepository.findByCategoryName("Jump Cues");
+            Category breakCueCategory = categoryRepository.findByCategoryName("Break Cues");
 
-            System.out.println("true");
-            Category cueCategory = new Category
-                    ("Cues",
-                     "This category contains all items relating to billiard cues. This includes yada, yadada, and yada."
-                    );
-            categoryRepository.save(cueCategory);
 
-            Item item = new Item("Test Cue1", 7001, cueCategory);
-            Item item1 = new Item("Test Cue2", 7020, cueCategory);
-            Item item2 = new Item("Test Cue3", 7030, cueCategory);
-
-            itemRepository.save(item);
-            itemRepository.save(item1);
-            itemRepository.save(item2);
-
+            Item airRush = new Item("Air Rush", 600.00, jumpCueCategory);
+            CreateItemWithCheck(airRush);
         };
+    }
+
+    private void CreateItemWithCheck(Item newItem) {
+        if (itemRepository.findByItemName(newItem.getItemName()) == null) {
+            itemRepository.save(newItem);
+        }
     }
 }
