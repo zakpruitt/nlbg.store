@@ -22,24 +22,26 @@ public class ItemConfig {
     private String env;
 
     @Bean
-    CommandLineRunner itemRunner(ItemRepository itemRepository) {
+    CommandLineRunner itemRunner() {
         return args -> {
 
-            System.out.println("true");
-            Category cueCategory = new Category
-                    ("Cues",
-                     "This category contains all items relating to billiard cues. This includes yada, yadada, and yada."
-                    );
-            categoryRepository.save(cueCategory);
 
-            Item item = new Item("Test Cue1", 7001, cueCategory);
-            Item item1 = new Item("Test Cue2", 7020, cueCategory);
-            Item item2 = new Item("Test Cue3", 7030, cueCategory);
-
-            itemRepository.save(item);
-            itemRepository.save(item1);
-            itemRepository.save(item2);
+//
+//            Item item = new Item("Test Cue1", 7001, cueCategory);
+//            Item item1 = new Item("Test Cue2", 7020, cueCategory);
+//            Item item2 = new Item("Test Cue3", 7030, cueCategory);
+//
+//
+//            itemRepository.save(item);
+//            itemRepository.save(item1);
+//            itemRepository.save(item2);
 
         };
+    }
+
+    private void CreateItemWithCheck(Category newCategory) {
+        if (categoryRepository.findByCategoryName(newCategory.getCategoryName()) == null) {
+            categoryRepository.save(newCategory);
+        }
     }
 }
