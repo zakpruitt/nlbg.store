@@ -13,7 +13,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -34,5 +33,38 @@ public class Category extends AuditModel {
     public Category(String categoryName, String categoryDescription) {
         this.categoryName = categoryName;
         this.categoryDescription = categoryDescription;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryDescription() {
+        return categoryDescription;
+    }
+
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
+    }
+
+    @Nullable
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(@Nullable Set<Item> items) {
+        this.items = items;
     }
 }
