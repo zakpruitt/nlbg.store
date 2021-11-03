@@ -20,7 +20,7 @@ public class ShippingInformation extends AuditModel {
     @NotNull
     private String shippingAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_ID", referencedColumnName = "id")
     private Order parentOrder;
 

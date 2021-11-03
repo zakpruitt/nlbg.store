@@ -35,7 +35,7 @@ public class Order extends AuditModel {
     private Customer customer;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_information_ID", referencedColumnName = "id")
     private ShippingInformation shippingInformation;
 

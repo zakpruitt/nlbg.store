@@ -3,6 +3,7 @@ package com.nlbg.store.domain.Item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nlbg.store.domain.AuditModel;
 import com.nlbg.store.domain.Order.Order;
+import com.nlbg.store.domain.Raffle.RaffleDetail;
 import org.springframework.lang.Nullable;
 
 import javax.annotation.PostConstruct;
@@ -37,6 +38,11 @@ public class Item extends AuditModel {
     @JsonIgnore
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Order> orders;
+
+    @Nullable
+    @JsonIgnore
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<RaffleDetail> associatedRaffles;
 
     public Item(String itemName, double itemDesiredValue, Category category) {
         this.itemName = itemName;
@@ -105,5 +111,23 @@ public class Item extends AuditModel {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Nullable
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(@Nullable Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    @Nullable
+    public Set<RaffleDetail> getAssociatedRaffles() {
+        return associatedRaffles;
+    }
+
+    public void setAssociatedRaffles(@Nullable Set<RaffleDetail> associatedRaffles) {
+        this.associatedRaffles = associatedRaffles;
     }
 }
