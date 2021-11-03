@@ -1,12 +1,13 @@
 package com.nlbg.store.domain.Raffle;
 
+import com.nlbg.store.domain.AuditModel;
 import com.nlbg.store.domain.Item.Item;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class RaffleDetail {
+public class RaffleDetail extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

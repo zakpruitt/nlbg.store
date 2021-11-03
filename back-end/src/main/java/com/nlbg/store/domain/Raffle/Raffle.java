@@ -1,5 +1,6 @@
 package com.nlbg.store.domain.Raffle;
 
+import com.nlbg.store.domain.AuditModel;
 import com.nlbg.store.domain.User.Customer;
 import org.springframework.lang.Nullable;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-public class Raffle {
+public class Raffle extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
