@@ -4526,6 +4526,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  background-color:#000;
 }
 
 .card-title {
@@ -10861,19 +10862,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("../img/NLBGLogoLeftRotate.png");
+  background: url("https://images.unsplash.com/photo-1624827637654-84cd4877717e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=327&q=80");
   background-position: center ;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("../img/NLBGLogoLeftRotate.png");
+  background: url("https://images.unsplash.com/photo-1624827637654-84cd4877717e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=327&q=80");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("../img/NLBGLogoLeftRotate.png");
+  background: url("https://images.unsplash.com/photo-1624827637654-84cd4877717e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=327&q=80");
   background-position: center;
   background-size: cover;
 }
@@ -10886,6 +10887,7 @@ form.user .form-control-user {
   font-size: 0.8rem;
   border-radius: 10rem;
   padding: 1.5rem 1rem;
+  background-color:#000;
 }
 
 form.user .btn-user {
