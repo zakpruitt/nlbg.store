@@ -22,6 +22,7 @@ public class Category extends AuditModel {
     @NotEmpty(message = "Item Name is required.")
     private String categoryName;
     @NotNull
+    @Lob
     private String categoryDescription;
     @Nullable
     @JsonIgnore
