@@ -50,6 +50,9 @@ public class Item extends AuditModel {
         this.category = category;
     }
 
+    public Item() {
+    }
+
     @PostConstruct
     private void setQuantities() {
         this.quantitySold = 0;

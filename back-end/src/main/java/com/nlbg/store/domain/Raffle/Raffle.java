@@ -6,6 +6,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,25 +16,28 @@ public class Raffle extends AuditModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    private Date startDate;
-    @NotNull
-    private Date endDate;
-    @Nullable
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int winningSlot;
 
-    @Nullable
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "winning_customer_id", referencedColumnName = "id")
     private Customer customer;
 
     @OneToMany(mappedBy = "raffle", cascade = CascadeType.ALL)
     private Set<RaffleCustomer> raffleCustomers;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "raffle_details_id", referencedColumnName = "id")
     private RaffleDetail raffleDetail;
+
+    public Raffle(LocalDate startDate, LocalDate endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Raffle() {
+    }
 
     public Long getId() {
         return id;
@@ -43,19 +47,19 @@ public class Raffle extends AuditModel {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -67,12 +71,11 @@ public class Raffle extends AuditModel {
         this.winningSlot = winningSlot;
     }
 
-    @Nullable
     public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(@Nullable Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -82,5 +85,13 @@ public class Raffle extends AuditModel {
 
     public void setRaffleCustomers(Set<RaffleCustomer> raffleCustomers) {
         this.raffleCustomers = raffleCustomers;
+    }
+
+    public RaffleDetail getRaffleDetail() {
+        return raffleDetail;
+    }
+
+    public void setRaffleDetail(RaffleDetail raffleDetail) {
+        this.raffleDetail = raffleDetail;
     }
 }

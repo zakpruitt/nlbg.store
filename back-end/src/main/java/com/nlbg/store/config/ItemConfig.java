@@ -132,7 +132,7 @@ public class ItemConfig {
             Item predatorSneakyPeteMidnightWrapless = new Item("Predator Sneaky Pete Midnight - Wrapless", 589.00, playingCueCategory);
             CreateItemWithCheck(predatorSneakyPeteMidnightWrapless);
 
-            System.out.println("Done");
+            System.out.println("Item runner complete.");
 
         };
     }

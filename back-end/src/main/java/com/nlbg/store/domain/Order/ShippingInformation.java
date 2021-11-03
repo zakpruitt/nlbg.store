@@ -13,11 +13,8 @@ public class ShippingInformation extends AuditModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private boolean localPickup;
-    @NotNull
     private int shippingStatus;
-    @NotNull
     private String shippingAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -36,6 +33,9 @@ public class ShippingInformation extends AuditModel {
         this.shippingAddress = admin.getShippingAddress();
         this.parentOrder = order;
         this.shippingStatus = 0;
+    }
+
+    public ShippingInformation() {
     }
 
     public Long getId() {

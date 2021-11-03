@@ -16,12 +16,10 @@ public class RaffleDetail extends AuditModel {
     private int pricePerSlot;
     private boolean full;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "raffle_id", referencedColumnName = "id")
     private Raffle raffle;
@@ -32,6 +30,9 @@ public class RaffleDetail extends AuditModel {
         this.item = item;
         this.raffle = raffle;
         this.full = false;
+    }
+
+    public RaffleDetail() {
     }
 
     public Long getId() {

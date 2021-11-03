@@ -7,6 +7,7 @@ import com.nlbg.store.domain.User.Customer;
 import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class RaffleCustomer extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +27,9 @@ public class RaffleCustomer extends AuditModel {
         this.raffle = raffle;
         this.customer = customer;
         this.position = position;
+    }
+
+    public RaffleCustomer() {
     }
 
     public Long getId() {

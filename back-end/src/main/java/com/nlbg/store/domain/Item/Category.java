@@ -30,6 +30,9 @@ public class Category extends AuditModel {
         this.categoryDescription = categoryDescription;
     }
 
+    public Category() {
+    }
+
     public Long getId() {
         return id;
     }

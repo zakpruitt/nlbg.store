@@ -11,38 +11,37 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@Table(name = "orders")
 public class Order extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private int orderStatus;
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date startDate;
-    @Nullable
     private Date endDate;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_information_ID", referencedColumnName = "id")
     private ShippingInformation shippingInformation;
 
-    public Order(Item item, Customer customer, ShippingInformation shippingInformation) {
+    public Order(Item item, Customer customer) {
         this.item = item;
         this.customer = customer;
-        this.shippingInformation = shippingInformation;
+        this.orderStatus = 0;
+    }
+
+    public Order() {
     }
 
     public Long getId() {
@@ -69,12 +68,11 @@ public class Order extends AuditModel {
         this.startDate = startDate;
     }
 
-    @Nullable
     public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(@Nullable Date endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
