@@ -11,8 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Item extends AuditModel {
     @Id

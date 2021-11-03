@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Customer extends User {
 //    @OneToMany(mappedBy = "customer_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

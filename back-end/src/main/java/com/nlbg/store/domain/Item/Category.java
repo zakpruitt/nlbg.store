@@ -13,8 +13,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Category extends AuditModel {
     @Id
