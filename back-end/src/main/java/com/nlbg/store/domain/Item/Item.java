@@ -1,6 +1,8 @@
 package com.nlbg.store.domain.Item;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nlbg.store.domain.AuditModel;
+import com.nlbg.store.domain.Order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 public class Item extends AuditModel {
@@ -27,10 +30,16 @@ public class Item extends AuditModel {
     private int quantitySold;
     @NotNull
     private int quantityBought;
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+
+    @Nullable
+    @JsonIgnore
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Order> orders;
 
     public Item(String itemName, double itemDesiredValue, Category category) {
         this.itemName = itemName;
