@@ -6,7 +6,6 @@ import com.nlbg.store.domain.User.Customer;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.lang.Nullable;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;

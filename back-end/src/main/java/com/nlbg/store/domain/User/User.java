@@ -1,8 +1,6 @@
 package com.nlbg.store.domain.User;
 
 import com.nlbg.store.domain.AuditModel;
-import lombok.Data;
-import org.apache.tomcat.jni.Address;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

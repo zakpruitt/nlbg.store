@@ -3,9 +3,6 @@ package com.nlbg.store.domain.Item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nlbg.store.domain.AuditModel;
 import com.nlbg.store.domain.Order.Order;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.annotation.PostConstruct;

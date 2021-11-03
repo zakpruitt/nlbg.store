@@ -1,12 +1,11 @@
 package com.nlbg.store.domain.User;
 
-import com.nlbg.store.domain.Item.Item;
 import com.nlbg.store.domain.Order.Order;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
