@@ -132,6 +132,83 @@ public class ItemConfig {
             Item predatorSneakyPeteMidnightWrapless = new Item("Predator Sneaky Pete Midnight - Wrapless", 589.00, playingCueCategory);
             CreateItemWithCheck(predatorSneakyPeteMidnightWrapless);
 
+            Item predatorSneakyPeteMidnightLinen = new Item("Predator Sneaky Pete Midnight - Linen", 569.00, playingCueCategory);
+            CreateItemWithCheck(predatorSneakyPeteMidnightLinen);
+
+            Item predatorBlak41 = new Item("Predator Blak 4-1", 1149.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlak41);
+
+            Item predatorBlak42 = new Item("Predator Blak 4-2", 1229.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlak42);
+
+            Item predatorBlak43 = new Item("Predator Blak 4-3", 1299.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlak43);
+
+            Item predatorBlak44 = new Item("Predator Blak 4-4", 1429.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlak44);
+
+            Item predatorBlak45 = new Item("Predator Blak 4-5", 1599.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlak45);
+
+            Item predatorIkon41 = new Item("Predator Ikon 4-1", 1349.00, playingCueCategory);
+            CreateItemWithCheck(predatorIkon41);
+
+            Item predatorIkon42 = new Item("Predator Ikon 4-2", 1389.00, playingCueCategory);
+            CreateItemWithCheck(predatorIkon42);
+
+            Item predatorIkon43 = new Item("Predator Ikon 4-3", 1449.00, playingCueCategory);
+            CreateItemWithCheck(predatorIkon43);
+
+            Item predatorIkon44 = new Item("Predator Ikon 4-4", 1509.00, playingCueCategory);
+            CreateItemWithCheck(predatorIkon44);
+
+            Item predatorIkon45 = new Item("Predator Ikon 4-5", 1579.00, playingCueCategory);
+            CreateItemWithCheck(predatorIkon45);
+
+            Item predator9k1 = new Item("Predator 9K-1", 659.00, playingCueCategory);
+            CreateItemWithCheck(predator9k1);
+
+            Item predator9k2 = new Item("Predator 9K-2", 719.00, playingCueCategory);
+            CreateItemWithCheck(predator9k2);
+
+            Item predator9k3 = new Item("Predator 9K-3", 909.00, playingCueCategory);
+            CreateItemWithCheck(predator9k3);
+
+            Item predatorBlackP3NW = new Item("Predator Black P3 - No Wrap", 859.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlackP3NW);
+
+            Item predatorBlackP3Wrap = new Item("Predator Black P3 - Wrap", 909.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlackP3Wrap);
+
+            Item predatorCurlyP3NW = new Item("Predator P3 - No Wrap", 859.00, playingCueCategory);
+            CreateItemWithCheck(predatorBlackP3NW);
+
+            Item meucciCasino1 = new Item("Meucci Casino 1", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino1);
+
+            Item meucciCasino2 = new Item("Meucci Casino 2", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino2);
+
+            Item meucciCasino3 = new Item("Meucci Casino 3", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino3);
+
+            Item meucciCasino4 = new Item("Meucci Casino 4", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino4);
+
+            Item meucciCasino5 = new Item("Meucci Casino 5", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino5);
+
+            Item meucciCasino6 = new Item("Meucci Casino 6", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino6);
+
+            Item meucciCasino7 = new Item("Meucci Casino 7", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino7);
+
+            Item meucciCasino8 = new Item("Meucci Casino 8", 1135.00, playingCueCategory);
+            CreateItemWithCheck(meucciCasino8);
+
+
+
             System.out.println("Done");
 
         };
