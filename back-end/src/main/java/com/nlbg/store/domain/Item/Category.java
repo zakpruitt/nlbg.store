@@ -1,9 +1,7 @@
-package com.nlbg.store.domain;
+package com.nlbg.store.domain.Item;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.nlbg.store.domain.AuditModel;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -11,9 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Category extends AuditModel {
     @Id
@@ -33,5 +28,41 @@ public class Category extends AuditModel {
     public Category(String categoryName, String categoryDescription) {
         this.categoryName = categoryName;
         this.categoryDescription = categoryDescription;
+    }
+
+    public Category() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryDescription() {
+        return categoryDescription;
+    }
+
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
+    }
+
+    @Nullable
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(@Nullable Set<Item> items) {
+        this.items = items;
     }
 }
