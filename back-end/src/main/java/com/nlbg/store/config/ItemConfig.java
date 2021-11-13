@@ -1,7 +1,7 @@
 package com.nlbg.store.config;
 
-import com.nlbg.store.domain.Category;
-import com.nlbg.store.domain.Item;
+import com.nlbg.store.domain.Item.Category;
+import com.nlbg.store.domain.Item.Item;
 import com.nlbg.store.repository.CategoryRepository;
 import com.nlbg.store.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
