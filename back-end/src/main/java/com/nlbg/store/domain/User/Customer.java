@@ -4,12 +4,15 @@ import com.nlbg.store.domain.Order.Order;
 import com.nlbg.store.domain.Raffle.Raffle;
 import com.nlbg.store.domain.Raffle.RaffleCustomer;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Null;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity

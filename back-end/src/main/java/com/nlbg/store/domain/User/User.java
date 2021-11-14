@@ -1,6 +1,9 @@
 package com.nlbg.store.domain.User;
 
 import com.nlbg.store.domain.AuditModel;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,9 +13,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Collection;
+import java.util.Collections;
 
 @MappedSuperclass
-public abstract class User extends AuditModel {
+public abstract class User extends AuditModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
@@ -24,6 +29,9 @@ public abstract class User extends AuditModel {
     @NotNull(message = "Email is required.")
     @Email
     protected String email;
+    protected String password;
+    protected Boolean locked;
+    protected Boolean enabled;
     @Pattern(regexp="(^$|[0-9]{10})")
     protected String phoneNumber;
     @NotNull(message = "Shipping Address is required.")
@@ -85,5 +93,45 @@ public abstract class User extends AuditModel {
 
     public void setBillingAddress(String billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(this.getClass().getSimpleName());
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
     }
 }
