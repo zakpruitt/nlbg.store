@@ -1,4 +1,4 @@
-package com.nlbg.store.domain.User;
+package com.nlbg.store.domain.Token;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

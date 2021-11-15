@@ -1,5 +1,6 @@
 package com.nlbg.store.service;
 
+import com.nlbg.store.domain.Token.ConfirmationToken;
 import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Service
 public class CustomerService implements UserDetailsService {
 
@@ -16,6 +20,9 @@ public class CustomerService implements UserDetailsService {
     private CustomerRepository customerRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private ConfirmationTokenService confirmationTokenService;
+
 
     private final String USER_NOT_FOUND = "User with email %s not found.";
 
@@ -38,6 +45,19 @@ public class CustomerService implements UserDetailsService {
        customer.setPassword(encodedPassword);
 
        customerRepository.save(customer);
-       return "it works" + customer.getPassword();
+
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(30),
+                customer
+        );
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+       return token;
+    }
+
+    public int enableCustomer(String email) {
+        return customerRepository.enableCustomer(email);
     }
 }
