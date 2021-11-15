@@ -40,35 +40,35 @@ public class TestConfig {
     @Bean
     CommandLineRunner testRunner() {
         return args -> {
-            Customer customer = new Customer(
-                    "Zak",
-                    "Pruitt",
-                    "pruittzn@gmail.com",
-                    "6185934183",
-                    "206 Arbor Meadows Ct, Fairview Heights, IL",
-                    "206 Arbor Meadows Ct, Fairview Heights, IL"
-            );
-            customerRepository.save(customer);
-
-            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
-
-            Order order = new Order(predatorAirRush, customer);
-            ShippingInformation shippingInformation = new ShippingInformation(true, customer, order);
-            order.setShippingInformation(shippingInformation);
-            orderRepository.save(order);
-
-            Raffle raffle = new Raffle(LocalDate.of(2021, 11, 5),
-                                       LocalDate.of(2021, 11, 6));
-            RaffleDetail raffleDetail = new RaffleDetail(20, 20, predatorAirRush, raffle);
-            raffle.setRaffleDetail(raffleDetail);
-            raffleRepository.save(raffle);
-
-            RaffleCustomer raffleCustomer = new RaffleCustomer(raffle, customer, 1);
-            RaffleCustomer raffleCustomer1 = new RaffleCustomer(raffle, customer, 2);
-            RaffleCustomer raffleCustomer2 = new RaffleCustomer(raffle, customer, 3);
-            RaffleCustomer raffleCustomer3 = new RaffleCustomer(raffle, customer, 4);
-            raffleCustomerRepository.saveAll(Arrays.asList(raffleCustomer, raffleCustomer1, raffleCustomer2, raffleCustomer3));
-            System.out.println("Test runner complete.");
+//            Customer customer = new Customer(
+//                    "Zak",
+//                    "Pruitt",
+//                    "pruittzn@gmail.com",
+//                    "6185934183",
+//                    "206 Arbor Meadows Ct, Fairview Heights, IL",
+//                    "206 Arbor Meadows Ct, Fairview Heights, IL"
+//            );
+//            customerRepository.save(customer);
+//
+//            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
+//
+//            Order order = new Order(predatorAirRush, customer);
+//            ShippingInformation shippingInformation = new ShippingInformation(true, customer, order);
+//            order.setShippingInformation(shippingInformation);
+//            orderRepository.save(order);
+//
+//            Raffle raffle = new Raffle(LocalDate.of(2021, 11, 5),
+//                                       LocalDate.of(2021, 11, 6));
+//            RaffleDetail raffleDetail = new RaffleDetail(20, 20, predatorAirRush, raffle);
+//            raffle.setRaffleDetail(raffleDetail);
+//            raffleRepository.save(raffle);
+//
+//            RaffleCustomer raffleCustomer = new RaffleCustomer(raffle, customer, 1);
+//            RaffleCustomer raffleCustomer1 = new RaffleCustomer(raffle, customer, 2);
+//            RaffleCustomer raffleCustomer2 = new RaffleCustomer(raffle, customer, 3);
+//            RaffleCustomer raffleCustomer3 = new RaffleCustomer(raffle, customer, 4);
+//            raffleCustomerRepository.saveAll(Arrays.asList(raffleCustomer, raffleCustomer1, raffleCustomer2, raffleCustomer3));
+//            System.out.println("Test runner complete.");
 
         };
     }

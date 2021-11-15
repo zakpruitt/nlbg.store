@@ -23,4 +23,32 @@ public class RegistrationRequest {
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public String getBillingAddress() {
+        return billingAddress;
+    }
 }
