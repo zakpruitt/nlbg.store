@@ -132,6 +132,6 @@ public abstract class User extends AuditModel implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 }

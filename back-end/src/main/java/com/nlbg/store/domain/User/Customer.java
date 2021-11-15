@@ -26,13 +26,16 @@ public class Customer extends User {
         @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
         private Set<RaffleCustomer> raffleCustomers;
 
-        public Customer(String firstName, String lastName, String email, String phoneNumber, String shippingAddress, String billingAddress) {
+        public Customer(String firstName, String lastName, String password, String email, String phoneNumber, String shippingAddress, String billingAddress) {
                 this.firstName = firstName;
                 this.lastName = lastName;
+                this.password = password;
                 this.email = email;
                 this.phoneNumber = phoneNumber;
                 this.shippingAddress = shippingAddress;
                 this.billingAddress = billingAddress;
+                enabled = false;
+                locked = false;
         }
 
         public Customer() {
