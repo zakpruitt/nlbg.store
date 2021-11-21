@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,6 +38,7 @@ public class Raffle extends AuditModel {
         this.URL = UUID.randomUUID().toString();
         this.startDate = startDate;
         this.endDate = endDate;
+        raffleCustomers = new HashSet<>();
     }
 
     public Raffle() {

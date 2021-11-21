@@ -8,6 +8,7 @@ import com.nlbg.store.domain.Raffle.RaffleCustomer;
 import com.nlbg.store.domain.Raffle.RaffleDetail;
 import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.*;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -62,14 +63,19 @@ public class TestConfig {
             RaffleDetail raffleDetail = new RaffleDetail(20, 20, predatorAirRush, raffle);
             raffle.setRaffleDetail(raffleDetail);
             raffleRepository.save(raffle);
-//
-//            RaffleCustomer raffleCustomer = new RaffleCustomer(raffle, customer, 1);
-//            RaffleCustomer raffleCustomer1 = new RaffleCustomer(raffle, customer, 2);
-//            RaffleCustomer raffleCustomer2 = new RaffleCustomer(raffle, customer, 3);
-//            RaffleCustomer raffleCustomer3 = new RaffleCustomer(raffle, customer, 4);
-//            raffleCustomerRepository.saveAll(Arrays.asList(raffleCustomer, raffleCustomer1, raffleCustomer2, raffleCustomer3));
-//            System.out.println("Test runner complete.");
 
+
+            Customer customer = customerRepository.findByEmail("zakpruitt5@gmail.com").orElseThrow(
+                    () -> new NotFoundException("bruh")
+            );
+            RaffleCustomer raffleCustomer = new RaffleCustomer(raffle, customer, 1);
+            RaffleCustomer raffleCustomer1 = new RaffleCustomer(raffle, customer, 2);
+            RaffleCustomer raffleCustomer2 = new RaffleCustomer(raffle, customer, 3);
+            RaffleCustomer raffleCustomer3 = new RaffleCustomer(raffle, customer, 4);
+
+            System.out.println(raffle.getRaffleCustomers().size());
+            raffleCustomerRepository.saveAll(Arrays.asList(raffleCustomer, raffleCustomer1, raffleCustomer2, raffleCustomer3));
+            System.out.println("Test runner complete.");
         };
     }
 }
