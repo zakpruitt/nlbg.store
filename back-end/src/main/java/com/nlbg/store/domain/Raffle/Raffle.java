@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class Raffle extends AuditModel {
@@ -16,6 +17,7 @@ public class Raffle extends AuditModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String URL;
     private LocalDate startDate;
     private LocalDate endDate;
     private int winningSlot;
@@ -32,6 +34,7 @@ public class Raffle extends AuditModel {
     private RaffleDetail raffleDetail;
 
     public Raffle(LocalDate startDate, LocalDate endDate) {
+        this.URL = UUID.randomUUID().toString();
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -93,5 +96,13 @@ public class Raffle extends AuditModel {
 
     public void setRaffleDetail(RaffleDetail raffleDetail) {
         this.raffleDetail = raffleDetail;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 }
