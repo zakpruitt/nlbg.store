@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.Dictionary;
 import java.util.List;
 
@@ -22,9 +23,10 @@ public class RaffleController {
     @Autowired
     RaffleService raffleService;
 
-    @GetMapping("/raffleURLs")
-    public String displayAllRaffleURLs() {
+    @GetMapping("/")
+    public String displayAllRaffleURLs(Principal principal) {
         StringBuilder sb = new StringBuilder();
+        sb.append(principal.getName() + " \n\n\n\n\n\n\t\t");
         for (Raffle raffle : raffleService.getAllRaffleURLs()) {
             sb.append(raffle.getURL() + " \n");
         }
