@@ -1,2 +1,2 @@
-front-end/vendor/* linguist-vendored
-front-end/header/* linguist-vendored
+front-end/vendor/** linguist-vendored
+front-end/header/** linguist-vendored
