@@ -12,7 +12,5 @@ A web application that facilitates Next Level Billiards Gear buying/selling serv
     - Bootstrap 5
 - Database
     - MySQL
-    - SQLite
-    - PostgreSQL
 - Deployment
     - Heroku
