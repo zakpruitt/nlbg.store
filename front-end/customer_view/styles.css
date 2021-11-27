@@ -26,3 +26,8 @@
 .shop-row {
   margin-top: 6%;
 }
+
+.raffle-table {
+  margin: auto;
+  width: 80% !important; 
+}
