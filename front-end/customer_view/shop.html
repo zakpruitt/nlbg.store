@@ -46,8 +46,8 @@
         </header>
     </div> -->
 
-    <!-- Logged in bar -->
     <div class="container">
+        <!-- Logged in bar -->
         <header
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
@@ -58,7 +58,7 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Shop</a></li>
-                <li><a href="/raffle_display.html" class="nav-link px-2 link-dark">Raffles</a></li>
+                <li><a href="raffle_display.html" class="nav-link px-2 link-dark">Raffles</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-link px-2 dropdown-toggle link-dark" href="#" id="navbarDropdown"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,30 +85,49 @@
         <div class="row">
             <!-- Filter Side -->
             <div class="col-3 border-end">
-                hello
-                hellohellohellohellohello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hello
-                hellohello
-                hello
-                hello
-                hello
-                hello
+                <!-- Out of Stock Toggle -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="outOfStockCheck">
+                    <label class="form-check-label" for="outOfStockCheck">Show out of stock items</label>
+                </div>
+                <hr>
 
+                <!-- Categories -->
+                <div>
+                    <b><p>Categories</p></b>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="jumpCueCategoryCheck">
+                        <label class="form-check-label" for="jumpCueCategoryCheck">Jump Cues</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="breakCueCategoryCheck">
+                        <label class="form-check-label" for="breakCueCategoryCheck">Break Cues</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="playingCueCategoryCheck">
+                        <label class="form-check-label" for="playingCueCategoryCheck">Playing Cues</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="shaftCueCategoryCheck">
+                        <label class="form-check-label" for="shaftCueCategoryCheck">Shafts</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gloveCueCategoryCheck">
+                        <label class="form-check-label" for="gloveCueCategoryCheck">Gloves</label>
+                    </div>
+                </div>
+                
+                <hr>
+
+                <!-- Price Filtering-->
+                <div>
+                    <b><p>Sort Prices</p></b>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected value="1">Highest to Lowest</option>
+                        <option value="2">Lowest to Highest</option>
+                    </select>
+                </div>
             </div>
-
             <!-- Item Side -->
             <div class="col-9">
                 <input type="text" class="form-control w-50 float-end" placeholder="Type to search for an item...">
@@ -312,10 +331,7 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
