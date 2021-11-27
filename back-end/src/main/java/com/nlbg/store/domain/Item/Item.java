@@ -46,11 +46,8 @@ public class Item extends AuditModel {
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RaffleDetail> associatedRaffles;
 
-    @ManyToMany
-    @JoinTable(
-            name = "item_photo",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
     Set<Photo> photos;
 
     public Item(String itemName, double itemDesiredValue, Category category) {

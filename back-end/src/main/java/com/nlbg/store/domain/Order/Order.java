@@ -37,11 +37,8 @@ public class Order extends AuditModel {
     @JoinColumn(name = "shipping_information_ID", referencedColumnName = "id")
     private ShippingInformation shippingInformation;
 
-    @ManyToMany
-    @JoinTable(
-            name = "sellorder_photo",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
     Set<Photo> sellOrderPhotos;
 
     public Order(Item item, Customer customer, int orderStatus) {

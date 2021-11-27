@@ -15,9 +15,9 @@ public class Photo {
     private String secureURL;
     private String photoType;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "photos")
     Set<Item> items;
-    @ManyToMany
+    @ManyToMany(mappedBy = "sellOrderPhotos")
     Set<Order> sellOrders;
 
     public Photo() {
