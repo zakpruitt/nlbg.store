@@ -2,6 +2,7 @@ package com.nlbg.store.domain.Order;
 
 import com.nlbg.store.domain.AuditModel;
 import com.nlbg.store.domain.Item.Item;
+import com.nlbg.store.domain.Photo.Photo;
 import com.nlbg.store.domain.User.Customer;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.lang.Nullable;
@@ -9,6 +10,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -35,10 +37,17 @@ public class Order extends AuditModel {
     @JoinColumn(name = "shipping_information_ID", referencedColumnName = "id")
     private ShippingInformation shippingInformation;
 
-    public Order(Item item, Customer customer) {
+    @ManyToMany
+    @JoinTable(
+            name = "sellorder_photo",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    Set<Photo> sellOrderPhotos;
+
+    public Order(Item item, Customer customer, int orderStatus) {
         this.item = item;
         this.customer = customer;
-        this.orderStatus = 0;
+        this.orderStatus = orderStatus;
     }
 
     public Order() {

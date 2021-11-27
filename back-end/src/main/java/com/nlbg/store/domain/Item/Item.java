@@ -3,6 +3,8 @@ package com.nlbg.store.domain.Item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nlbg.store.domain.AuditModel;
 import com.nlbg.store.domain.Order.Order;
+import com.nlbg.store.domain.Photo.Photo;
+import com.nlbg.store.domain.Raffle.RaffleCustomer;
 import com.nlbg.store.domain.Raffle.RaffleDetail;
 import org.springframework.lang.Nullable;
 
@@ -44,6 +46,13 @@ public class Item extends AuditModel {
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RaffleDetail> associatedRaffles;
 
+    @ManyToMany
+    @JoinTable(
+            name = "item_photo",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    Set<Photo> photos;
+
     public Item(String itemName, double itemDesiredValue, Category category) {
         this.itemName = itemName;
         this.itemDesiredValue = itemDesiredValue;
@@ -51,10 +60,6 @@ public class Item extends AuditModel {
     }
 
     public Item() {
-    }
-
-    @PostConstruct
-    private void setQuantities() {
         this.quantitySold = 0;
         this.quantityBought = 0;
         this.itemAverageValue = 0;
@@ -132,5 +137,13 @@ public class Item extends AuditModel {
 
     public void setAssociatedRaffles(@Nullable Set<RaffleDetail> associatedRaffles) {
         this.associatedRaffles = associatedRaffles;
+    }
+
+    public Set<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Set<Photo> photos) {
+        this.photos = photos;
     }
 }

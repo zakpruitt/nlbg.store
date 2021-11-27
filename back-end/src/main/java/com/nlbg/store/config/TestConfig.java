@@ -8,6 +8,7 @@ import com.nlbg.store.domain.Raffle.RaffleCustomer;
 import com.nlbg.store.domain.Raffle.RaffleDetail;
 import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.*;
+import com.nlbg.store.service.PhotoService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,10 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @Configuration
 public class TestConfig {
@@ -37,10 +35,14 @@ public class TestConfig {
     RaffleDetailRepository raffleDetailRepository;
     @Autowired
     RaffleCustomerRepository raffleCustomerRepository;
+    @Autowired
+    PhotoService photoService;
 
     @Bean
     CommandLineRunner testRunner() {
         return args -> {
+//            Map a = photoService.uploadImage("C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/a.jpg", "test");
+//            System.out.println(a.entrySet());
 //            Customer customer = new Customer(
 //                    "Zak",
 //                    "Pruitt",
