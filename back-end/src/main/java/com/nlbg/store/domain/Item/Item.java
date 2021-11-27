@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -46,9 +47,9 @@ public class Item extends AuditModel {
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RaffleDetail> associatedRaffles;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable
-    Set<Photo> photos;
+    Set<Photo> photos = new HashSet<>();
 
     public Item(String itemName, double itemDesiredValue, Category category) {
         this.itemName = itemName;

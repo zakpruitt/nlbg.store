@@ -10,6 +10,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -39,7 +40,7 @@ public class Order extends AuditModel {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
-    Set<Photo> sellOrderPhotos;
+    Set<Photo> sellOrderPhotos = new HashSet<>();
 
     public Order(Item item, Customer customer, int orderStatus) {
         this.item = item;

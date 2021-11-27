@@ -4,6 +4,7 @@ import com.nlbg.store.domain.Item.Item;
 import com.nlbg.store.domain.Order.Order;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,9 +17,9 @@ public class Photo {
     private String photoType;
 
     @ManyToMany(mappedBy = "photos")
-    Set<Item> items;
+    Set<Item> items = new HashSet<>();
     @ManyToMany(mappedBy = "sellOrderPhotos")
-    Set<Order> sellOrders;
+    Set<Order> sellOrders = new HashSet<>();
 
     public Photo() {
 

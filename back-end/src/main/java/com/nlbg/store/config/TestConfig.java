@@ -41,8 +41,6 @@ public class TestConfig {
     @Bean
     CommandLineRunner testRunner() {
         return args -> {
-//            Map a = photoService.uploadImage("C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/a.jpg", "test");
-//            System.out.println(a.entrySet());
 //            Customer customer = new Customer(
 //                    "Zak",
 //                    "Pruitt",
@@ -54,7 +52,16 @@ public class TestConfig {
 //            customerRepository.save(customer);
 //
             Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
-//
+//            predatorAirRush.getPhotos().add(photoService.uploadItemImage(
+//                    "C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/a.jpg",
+//                    "super-test",
+//                    predatorAirRush,
+//                    "primary"
+//            ));
+//            itemRepository.save(predatorAirRush);
+
+
+
 //            Order order = new Order(predatorAirRush, customer);
 //            ShippingInformation shippingInformation = new ShippingInformation(true, customer, order);
 //            order.setShippingInformation(shippingInformation);

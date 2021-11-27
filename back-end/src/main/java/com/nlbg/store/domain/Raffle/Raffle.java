@@ -28,7 +28,7 @@ public class Raffle extends AuditModel {
     private Customer customer;
 
     @OneToMany(mappedBy = "raffle", cascade = CascadeType.ALL)
-    private Set<RaffleCustomer> raffleCustomers;
+    private Set<RaffleCustomer> raffleCustomers = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "raffle_details_id", referencedColumnName = "id")
@@ -38,7 +38,6 @@ public class Raffle extends AuditModel {
         this.URL = UUID.randomUUID().toString();
         this.startDate = startDate;
         this.endDate = endDate;
-        raffleCustomers = new HashSet<>();
     }
 
     public Raffle() {
