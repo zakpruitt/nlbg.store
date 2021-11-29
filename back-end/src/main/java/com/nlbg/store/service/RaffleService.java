@@ -65,15 +65,16 @@ public class RaffleService {
         raffleExport.setEndDate(raffle.getEndDate());
         raffleExport.setItemName(item.getItemName());
         raffleExport.setItemCategory(item.getItemName());
-        raffleExport.setRaffleParticipantCount(raffleDetail.getSlotNumbers());
+        raffleExport.setRaffleParticipantCount(raffleCustomerRepository.countByRaffle(raffle));
         raffleExport.setPositionsHeld(positions);
         raffleExport.setOutcome(calculateOutcome(raffleExport, raffle, customer));
-        raffleExport.setOriginalURL("localhost:8080/raffles/" + raffle.getURL());
+        raffleExport.setOriginalURL("http://localhost:8080/raffles/" + raffle.getURL());
         return raffleExport;
     }
 
     private String calculateOutcome(RaffleExport raffleExport, Raffle raffle, Customer customer) {
-        long winningCustomerId = raffle.getCustomer().getId();
+        long winningCustomerId = 0;
+        if (raffle.getCustomer() != null) winningCustomerId = raffle.getCustomer().getId();
         String outcome = "";
 
         if (raffleExport.getStatus() == false) {

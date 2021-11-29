@@ -9,7 +9,7 @@ public class RaffleExport {
     private LocalDate endDate;
     private String itemName;
     private String itemCategory;
-    private int raffleParticipantCount;
+    private long raffleParticipantCount;
     private ArrayList<Long> positionsHeld;
     private String outcome;
     private String originalURL;
@@ -57,11 +57,11 @@ public class RaffleExport {
         this.itemCategory = itemCategory;
     }
 
-    public int getRaffleParticipantCount() {
+    public long getRaffleParticipantCount() {
         return raffleParticipantCount;
     }
 
-    public void setRaffleParticipantCount(int raffleParticipantCount) {
+    public void setRaffleParticipantCount(long raffleParticipantCount) {
         this.raffleParticipantCount = raffleParticipantCount;
     }
 

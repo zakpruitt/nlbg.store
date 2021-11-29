@@ -13,4 +13,5 @@ public interface RaffleCustomerRepository extends JpaRepository<RaffleCustomer, 
             "WHERE rc.customer.id = ?1")
     List<RaffleCustomer> findAllByCustomerId(Long customerId);
 
+    Long countByRaffle(Raffle raffle);
 }

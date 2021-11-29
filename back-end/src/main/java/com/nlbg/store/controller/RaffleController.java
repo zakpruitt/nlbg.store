@@ -8,7 +8,6 @@ import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.service.RaffleService;
 import javassist.NotFoundException;
-import jdk.internal.joptsimple.util.KeyValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +58,7 @@ public class RaffleController {
     }
 
     @GetMapping("/{raffleURL}")
+    @ResponseBody
     public String openRaffleByUrl(@PathVariable String raffleURL) {
         Raffle raffle = null;
         StringBuilder sb = new StringBuilder();
