@@ -3,27 +3,30 @@ package com.nlbg.store.controller;
 import com.nlbg.store.domain.Raffle.Raffle;
 import com.nlbg.store.domain.Raffle.RaffleCustomer;
 import com.nlbg.store.domain.Raffle.RaffleDetail;
+import com.nlbg.store.domain.Raffle.RaffleExport;
 import com.nlbg.store.domain.User.Customer;
+import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.service.RaffleService;
 import javassist.NotFoundException;
+import jdk.internal.joptsimple.util.KeyValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Dictionary;
-import java.util.List;
+import java.util.*;
 
-@RestController
-@RequestMapping(path = "api/v1/raffles")
+@Controller
+@RequestMapping(path = "/raffles")
 public class RaffleController {
 
     @Autowired
     RaffleService raffleService;
+    @Autowired
+    CustomerRepository customerRepository;
 
-    @GetMapping("/")
+    @GetMapping("/a")
     public String displayAllRaffleURLs(Principal principal) {
         StringBuilder sb = new StringBuilder();
         sb.append(principal.getName() + " \n\n\n\n\n\n\t\t");
@@ -31,6 +34,28 @@ public class RaffleController {
             sb.append(raffle.getURL() + " \n");
         }
         return sb.toString().trim();
+    }
+
+    @GetMapping("/")
+    public String displayAllUserRaffles(Principal principal, Model model) {
+        try {
+            Customer customer = customerRepository.findByEmail(principal.getName())
+                    .orElseThrow(() -> new NotFoundException("Customer not found!"));
+
+            Hashtable<Raffle, ArrayList<Long>> rs = raffleService.getAllUserRaffles(customer);
+            ArrayList<RaffleExport> raffleExports = new ArrayList<>();
+            for (Map.Entry<Raffle, ArrayList<Long>> kvp : rs.entrySet()) {
+                Raffle raffle = kvp.getKey();
+                ArrayList<Long> positions = kvp.getValue();
+                raffleExports.add(raffleService.buildRaffleExport(raffle, positions, customer));
+            }
+
+            model.addAttribute("raffleExports", raffleExports);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return "raffle_display";
     }
 
     @GetMapping("/{raffleURL}")

@@ -8,8 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface RaffleCustomerRepository extends JpaRepository<RaffleCustomer, Long> {
-//    @Query("SELECT * " +
-//           "FROM raffle_customer " +
-//           "WHERE raffle_id = ?1")
-//    List<RaffleCustomer> findAllCustomerIds(Long raffleId);
+    @Query("SELECT rc " +
+            "FROM RaffleCustomer rc " +
+            "WHERE rc.customer.id = ?1")
+    List<RaffleCustomer> findAllByCustomerId(Long customerId);
+
 }
