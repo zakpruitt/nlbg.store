@@ -65,7 +65,7 @@
 }
 
 .container {
-  max-width: 75%;
+  max-width: 100%;
 }
 
 .search-bar {
@@ -85,3 +85,16 @@
   width: 80% !important; 
 }
 
+.col-lg-4 {
+  border:black;
+  border-width:5px;
+  border-style:solid;
+  margin:0;
+  padding: 5px;
+}
+ .shop-logos {
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  width: auto;
+ }
