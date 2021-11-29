@@ -58,25 +58,20 @@ public class RaffleController {
     }
 
     @GetMapping("/{raffleURL}")
-    @ResponseBody
-    public String openRaffleByUrl(@PathVariable String raffleURL) {
-        Raffle raffle = null;
-        StringBuilder sb = new StringBuilder();
+    public String openRaffleByUrl(@PathVariable String raffleURL, Principal principal, Model model) {
         try {
-            raffle = raffleService.getRaffleByURL(raffleURL);
+            Raffle raffle = raffleService.getRaffleByURL(raffleURL);
             RaffleDetail raffleDetails = raffle.getRaffleDetail();
+            HashMap<Integer, String> namePosition = raffleService.getAllNamePosition(raffle, raffleDetails.getSlotNumbers());
 
-            sb.append(raffle.getId() + "\n");
-            sb.append(raffleDetails.getItem().getItemName() + "\n");
-            sb.append("\n customer with .getRaffleCustomers() test: ");
-            for (RaffleCustomer raffleCustomer : raffle.getRaffleCustomers()) {
-                sb.append(raffleCustomer.getCustomer().getFirstName() + "\n");
-                sb.append(raffleCustomer.getPosition() + "\n");
-            }
+            model.addAttribute("raffle", raffle);
+            model.addAttribute("raffleDetails", raffleDetails);
+            model.addAttribute("namePositions", namePosition);
         } catch (NotFoundException e) {
             e.printStackTrace();
             return e.getMessage();
         }
-        return sb.toString().trim();
+
+        return "raffle";
     }
 }

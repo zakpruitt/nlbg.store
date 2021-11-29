@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
 <body>
@@ -60,14 +60,14 @@
             </div>
         </header>
         
-        <h2>Raffle 58920212-8221-43d4-9f81-7480c70b3df1</h2>
-        <p>Start Date:
+        <h2 th:text="'Raffle ' + ${raffle.URL}"></h2>
+        <p>[['Start Date: ' + ${raffle.startDate}]]
             <br>
-            End Date:
+            [['End Date: ' + ${raffle.endDate}]]
             <br>
-            Item:
+            [['Item: ' + ${raffleDetails.item.itemName}]]
             <br>
-            Price Per Slot:
+            [['Price Per Slot: ' + ${raffleDetails.pricePerSlot}]]
             <br>
             Note: When joining a raffle, it will be added to your cart. To confirm your place in the raffle, make sure to check out!
         </p>
@@ -81,65 +81,15 @@
               </tr>
             </thead>
             <tbody class="align-middle">
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark Robinson</td>
-                <td><button type="button" class="btn btn-secondary disabled">Filled</button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Mark Robinson</td>
-                <td><button type="button" class="btn btn-secondary disabled">Filled</button></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">7</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">8</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">9</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">10</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">11</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
-              </tr>
-              <tr>
-                <th scope="row">12</th>
-                <td></td>
-                <td><button type="button" class="btn btn-success">Join</button></td>
+              <tr th:each="kvp : ${namePositions}">
+                <th scope="row" th:text="${kvp.key}"></th>
+                <td th:text="${kvp.value} ?: ''"></td>
+                <td>
+                    <button type="button"
+                            th:class="${kvp.value == null} ? 'btn btn-success' : 'btn btn-secondary disabled'"
+                            th:text="${kvp.value == null} ? 'Join' : 'Filled'">
+                    </button>
+                </td>
               </tr>
             </tbody>
         </table>

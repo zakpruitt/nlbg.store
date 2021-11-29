@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -39,7 +38,21 @@ public class RaffleService {
                 .orElseThrow(() -> new NotFoundException("Raffle not found!"));
     }
 
-    public Hashtable<Raffle, ArrayList<Long>> getAllUserRaffles(Customer customer) throws NotFoundException {
+    public HashMap<Integer, String> getAllNamePosition(Raffle raffle, int slotNumber) {
+        List<RaffleCustomer> rc = raffleCustomerRepository.findAllByRaffleId(raffle.getId());
+        HashMap<Integer, String> namePosition = new HashMap<>();
+
+        for (int i = 0; i < slotNumber; i++) {
+            namePosition.put(i + 1, null);
+        }
+        rc.forEach(ele -> namePosition.put(
+                ele.getPosition(),
+                ele.getCustomer().getFirstName() + " " + ele.getCustomer().getLastName()
+        ));
+        return namePosition;
+    }
+
+    public Hashtable<Raffle, ArrayList<Long>> getAllUserRaffles(Customer customer) {
         List<RaffleCustomer> raffleCustomers = raffleCustomerRepository.findAllByCustomerId(customer.getId());
 
         Hashtable<Raffle, ArrayList<Long>> rafflePositionsDictionary = new Hashtable<>();
