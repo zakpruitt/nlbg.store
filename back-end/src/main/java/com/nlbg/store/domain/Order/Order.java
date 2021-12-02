@@ -21,10 +21,6 @@ public class Order extends AuditModel {
     private Long id;
 
     private int orderStatus;
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date startDate;
-    private Date endDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
