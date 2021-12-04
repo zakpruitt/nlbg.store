@@ -18,12 +18,18 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
+    public Item getItemByName(String name) {
+        return itemRepository.findByItemName(name);
+    }
+
     public Hashtable<String, Double> getAllItemPrice() {
         List<Item> items = itemRepository.findAll();
         Hashtable<String, Double> itemPrice = new Hashtable<>();
         items.forEach(item -> itemPrice.put(item.getItemName(), item.getItemDesiredValue()));
         return itemPrice;
     }
+
+
 
 
 }

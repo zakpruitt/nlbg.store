@@ -1,6 +1,7 @@
 package com.nlbg.store.controller;
 
 import com.nlbg.store.domain.Item.Item;
+import com.nlbg.store.domain.Order.Order;
 import com.nlbg.store.domain.Order.SellOrderForm;
 import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.CustomerRepository;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Hashtable;
 import java.util.List;
@@ -43,20 +45,13 @@ public class OrderController {
     }
 
     @PostMapping("/sell-order")
-    @ResponseBody
-    public String createSellOrder(@ModelAttribute("sellOrderForm") SellOrderForm sellOrderForm) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(sellOrderForm.getFirstName());
-        stringBuilder.append(sellOrderForm.getLastName());
-        stringBuilder.append(sellOrderForm.getEmail());
-        stringBuilder.append(sellOrderForm.getPhoneNumber());
-        stringBuilder.append(sellOrderForm.getItemName());
-        stringBuilder.append(sellOrderForm.getItemPrice().toString());
-        stringBuilder.append(sellOrderForm.getComments());
-        for (MultipartFile file : sellOrderForm.getPhotos()) {
-            stringBuilder.append("\n" + file.getOriginalFilename() + "\n");
+    public String createSellOrder(@ModelAttribute("sellOrderForm") SellOrderForm sellOrderForm, Principal principal) {
+        try {
+            Customer customer = customerService.getCustomerByEmail(principal.getName());
+            orderService.createSellOrder(sellOrderForm, customer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        System.out.println(stringBuilder.toString());
-        return stringBuilder.toString();
+        return "redirect:/";
     }
 }

@@ -15,21 +15,6 @@ public class SellOrderForm {
     private List<MultipartFile> photos;
     private String comments;
 
-    public SellOrderForm(String firstName, String lastName, String email, String phoneNumber, String shippingAddress, String itemName, Double itemPrice, List<MultipartFile> photos, String comments) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.shippingAddress = shippingAddress;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.photos = photos;
-        this.comments = comments;
-    }
-
-    public SellOrderForm() {
-    }
-
     public String getFirstName() {
         return firstName;
     }
