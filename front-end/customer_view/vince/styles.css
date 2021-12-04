@@ -75,33 +75,11 @@
   width: 80% !important;
 }
 
-.col-lg-4 {
-  border: black;
-  border-width: 5px;
-  border-style: solid;
-  margin: 0;
-  padding: 5px;
-}
 .shop-logos {
   height: auto;
   max-width: 100%;
   position: relative;
   width: auto;
-}
-
-.nlbgHeading,
-.nlbgHeading:hover {
-  font-size: 50px;
-  font-weight: lighter;
-  text-decoration: none;
-  color: whitesmoke;
-  position: fixed;
-  top: 0px;
-  width: 70%;
-  min-height: 30px;
-  display: inline-block;
-  text-align: center;
-  margin: 0 auto;
 }
 
 .carousel-inner {
@@ -114,10 +92,10 @@
   margin-right: 50px;
 }
 
-.login-container {
-  margin-top: 6%;
-  border: 1rem;
+.headerLogo {
+  display: block;
+  margin-left: 100px;
+  margin-right: 100px;
+  width: 100%;
 }
-
-
 
