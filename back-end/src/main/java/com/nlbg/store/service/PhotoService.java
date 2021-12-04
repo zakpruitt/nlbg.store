@@ -43,4 +43,8 @@ public class PhotoService {
         );
         return photoRepository.save(sellOrderPhoto);
     }
+
+    public Photo a() {
+        cloudinary.downloadMulti()
+    }
 }

@@ -1,71 +1,61 @@
 .cart-bubble:hover {
-    background-color: white !important;
+  background-color: white !important;
 }
 
 .raffle-block {
-    margin-top: 4%;
-    max-width: 75%;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.container {
-    padding: 0;
-    margin: 0px;
-    max-width: 100%;
+  margin-top: 4%;
+  max-width: 75%;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer {
-    position: absolute;
-    bottom: 10;
-    width: 100%;
-    text-align: center;
-  }
+  position: absolute;
+  bottom: 10;
+  width: 100%;
+  text-align: center;
+}
 
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
   }
+}
 
-  .img-slides {
-    width:100%;
-    max-height: 450px;
-  }
+.img-slides {
+  width: 100%;
+  max-height: 450px;
+}
 
-  .img-PredatorLogo {
-    border-radius: 50%;
-  }
+.img-PredatorLogo {
+  border-radius: 50%;
+}
 
-  .marketing {
-    margin: 50px;
-  }
+.marketing {
+  margin: 50px;
+}
 
-  .cart-bubble:hover {
-    background-color: white !important;
+.cart-bubble:hover {
+  background-color: white !important;
 }
 
 .raffle-block {
-    margin-top: 4%;
-    max-width: 80%;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.container {
-  max-width: 100%;
+  margin-top: 4%;
+  max-width: 80%;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .search-bar {
@@ -82,52 +72,52 @@
 
 .raffle-table {
   margin: auto;
-  width: 80% !important; 
+  width: 80% !important;
 }
 
 .col-lg-4 {
-  border:black;
-  border-width:5px;
-  border-style:solid;
-  margin:0;
+  border: black;
+  border-width: 5px;
+  border-style: solid;
+  margin: 0;
   padding: 5px;
 }
- .shop-logos {
+.shop-logos {
   height: auto;
   max-width: 100%;
   position: relative;
   width: auto;
- }
+}
 
- .nlbgHeading, .nlbgHeading:hover {
-    font-size: 50px;
-    font-weight: lighter;
-    text-decoration: none;
-    color:whitesmoke;
-    position:fixed;
-    top: 0px;
-    width: 70%;
-    min-height: 30px;
-    display: inline-block;
-    text-align: center;
-    margin: 0 auto;
-    }
+.nlbgHeading,
+.nlbgHeading:hover {
+  font-size: 50px;
+  font-weight: lighter;
+  text-decoration: none;
+  color: whitesmoke;
+  position: fixed;
+  top: 0px;
+  width: 70%;
+  min-height: 30px;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+}
 
-    .carousel-inner {
-      margin-top: 2.5%;
-    }
+.carousel-inner {
+  margin-top: 2.5%;
+}
 
-    .col {
-      margin-top:50px;
-      margin-left: 175px;
-      margin-right: 50px;
-    }
-   
-    .form-floating {
-      margin-left: 700px;
-      margin-right: 700px;
-    }
+.col {
+  margin-top: 50px;
+  margin-left: 175px;
+  margin-right: 50px;
+}
 
-    .w-100 {
-      max-width: 10%;
-    }
+.login-container {
+  margin-top: 6%;
+  border: 1rem;
+}
+
+
+
