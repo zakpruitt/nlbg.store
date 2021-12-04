@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -54,5 +55,18 @@ public class PhotoService {
                 order
         );
         return photoRepository.save(sellOrderPhoto);
+    }
+
+    public String downloadImagesAsZip(String tag) throws UnsupportedEncodingException {
+        String url =  cloudinary.downloadZip(ObjectUtils.asMap(
+                "tags", tag,
+                "resource_type", "image")
+        );
+        int splitIndex =  url.indexOf('?');
+        int timestampIndex = url.length() - 10;
+        int endIndex = url.length() - 16;
+        String timestamp = "?timestamp=" + url.substring(timestampIndex) + "&";
+        url = url.substring(0, splitIndex) + timestamp + url.substring(splitIndex + 1, endIndex);
+        return url;
     }
 }

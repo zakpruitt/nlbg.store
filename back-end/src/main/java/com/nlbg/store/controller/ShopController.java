@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.HashMap;
 
@@ -23,6 +24,8 @@ public class ShopController {
 
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    PhotoService photoService;
 
     @GetMapping("/")
     public String renderShop(Principal principal, Model model) {
@@ -48,5 +51,17 @@ public class ShopController {
         }
 
         return "test";
+    }
+
+    @GetMapping("/test/{tag}")
+    @ResponseBody
+    public String downloadZip(@PathVariable String tag) {
+        String a = "";
+        try {
+            a = photoService.downloadImagesAsZip(tag);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return a;
     }
 }
