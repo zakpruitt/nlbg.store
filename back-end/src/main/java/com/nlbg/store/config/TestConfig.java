@@ -61,7 +61,7 @@ public class TestConfig {
 //            ));
             itemRepository.save(predatorAirRush);
             Order order = new Order(predatorAirRush, customer, 0);
-            ShippingInformation shippingInformation = new ShippingInformation(true, customer, order);
+            ShippingInformation shippingInformation = new ShippingInformation(true, "123 Based Lane", "125 Test Lane", order);
             order.setShippingInformation(shippingInformation);
             orderRepository.save(order);
             order.getSellOrderPhotos().add(photoService.uploadImage(

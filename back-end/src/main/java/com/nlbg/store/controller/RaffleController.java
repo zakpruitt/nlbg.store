@@ -6,6 +6,7 @@ import com.nlbg.store.domain.Raffle.RaffleDetail;
 import com.nlbg.store.domain.Raffle.RaffleExport;
 import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.CustomerRepository;
+import com.nlbg.store.service.CustomerService;
 import com.nlbg.store.service.RaffleService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class RaffleController {
     @Autowired
     RaffleService raffleService;
     @Autowired
-    CustomerRepository customerRepository;
+    CustomerService customerService;
 
     @GetMapping("/a")
     public String displayAllRaffleURLs(Principal principal) {
@@ -37,23 +38,17 @@ public class RaffleController {
 
     @GetMapping("/")
     public String displayAllUserRaffles(Principal principal, Model model) {
-        try {
-            Customer customer = customerRepository.findByEmail(principal.getName())
-                    .orElseThrow(() -> new NotFoundException("Customer not found!"));
+        Customer customer = customerService.getCustomerByEmail(principal.getName());
 
-            Hashtable<Raffle, ArrayList<Long>> rs = raffleService.getAllUserRaffles(customer);
-            ArrayList<RaffleExport> raffleExports = new ArrayList<>();
-            for (Map.Entry<Raffle, ArrayList<Long>> kvp : rs.entrySet()) {
-                Raffle raffle = kvp.getKey();
-                ArrayList<Long> positions = kvp.getValue();
-                raffleExports.add(raffleService.buildRaffleExport(raffle, positions, customer));
-            }
-
-            model.addAttribute("raffleExports", raffleExports);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
+        Hashtable<Raffle, ArrayList<Long>> rs = raffleService.getAllUserRaffles(customer);
+        ArrayList<RaffleExport> raffleExports = new ArrayList<>();
+        for (Map.Entry<Raffle, ArrayList<Long>> kvp : rs.entrySet()) {
+            Raffle raffle = kvp.getKey();
+            ArrayList<Long> positions = kvp.getValue();
+            raffleExports.add(raffleService.buildRaffleExport(raffle, positions, customer));
         }
 
+        model.addAttribute("raffleExports", raffleExports);
         return "raffle_display";
     }
 

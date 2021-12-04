@@ -21,6 +21,8 @@ public class Order extends AuditModel {
     private Long id;
 
     private int orderStatus;
+    @Lob
+    private String comments;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
@@ -61,6 +63,14 @@ public class Order extends AuditModel {
 
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public Item getItem() {
