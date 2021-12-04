@@ -86,4 +86,12 @@ public class Order extends AuditModel {
     public void setShippingInformation(ShippingInformation shippingInformation) {
         this.shippingInformation = shippingInformation;
     }
+
+    public Set<Photo> getSellOrderPhotos() {
+        return sellOrderPhotos;
+    }
+
+    public void setSellOrderPhotos(Set<Photo> sellOrderPhotos) {
+        this.sellOrderPhotos = sellOrderPhotos;
+    }
 }

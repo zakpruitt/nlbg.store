@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .img {
+            width: 500px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <img th:each="photoURL: ${photos}" th:src="${photoURL.secureURL}" class="img">
+</body>
+</html>

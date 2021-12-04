@@ -1,40 +1,40 @@
-//package com.nlbg.store.config;
-//
-//import com.nlbg.store.domain.Item.Category;
-//import com.nlbg.store.domain.Item.Item;
-//import com.nlbg.store.repository.CategoryRepository;
-//import com.nlbg.store.repository.ItemRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//
-//@Configuration
-//public class ItemConfig {
-//
-//    @Autowired
-//    ItemRepository itemRepository;
-//    @Autowired
-//    CategoryRepository categoryRepository;
-//
-//    @Value("${STORE.ENV}")
-//    private String env;
-//
-//    @Bean
-//    CommandLineRunner itemRunner() {
-//        return args -> {
-//            Category jumpCueCategory = categoryRepository.findByCategoryName("Jump Cues");
+package com.nlbg.store.config;
+
+import com.nlbg.store.domain.Item.Category;
+import com.nlbg.store.domain.Item.Item;
+import com.nlbg.store.repository.CategoryRepository;
+import com.nlbg.store.repository.ItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ItemConfig {
+
+    @Autowired
+    ItemRepository itemRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Value("${STORE.ENV}")
+    private String env;
+
+    @Bean
+    CommandLineRunner itemRunner() {
+        return args -> {
+            Category jumpCueCategory = categoryRepository.findByCategoryName("Jump Cues");
 //            Category breakCueCategory = categoryRepository.findByCategoryName("Break Cues");
 //            Category playingCueCategory = categoryRepository.findByCategoryName("Playing Cues");
 //            Category shaftsCategory = categoryRepository.findByCategoryName("Shafts");
 //            Category glovesCategory = categoryRepository.findByCategoryName("Gloves");
 //            Category casesCategory = categoryRepository.findByCategoryName("Cases");
 //            Category customCueCategory = categoryRepository.findByCategoryName("Custom Cues");
-//
-//            Item predatorAirRush = new Item("Predator Air Rush", 599.00, jumpCueCategory);
-//            CreateItemWithCheck(predatorAirRush);
-////
+
+            Item predatorAirRush = new Item("Predator Air Rush", 599.00, jumpCueCategory);
+            CreateItemWithCheck(predatorAirRush);
+            //region misc code
 ////            Item predatorAir2IceSportWrap = new Item("Predator Air 2 Ice - Sport Wrap", 289.00, jumpCueCategory);
 ////            CreateItemWithCheck(predatorAir2IceSportWrap);
 ////
@@ -349,15 +349,14 @@
 ////
 ////            Item molinariGloves = new Item("Molinari Glove", 29.99, glovesCategory);
 ////            CreateItemWithCheck(molinariGloves);
-//
-//            System.out.println("Done");
-//
-//        };
-//    }
-//
-//    private void CreateItemWithCheck(Item newItem) {
-//        if (itemRepository.findByItemName(newItem.getItemName()) == null) {
-//            itemRepository.save(newItem);
-//        }
-//    }
-//}
+//endregion
+            System.out.println("Done");
+        };
+    }
+
+    private void CreateItemWithCheck(Item newItem) {
+        if (itemRepository.findByItemName(newItem.getItemName()) == null) {
+            itemRepository.save(newItem);
+        }
+    }
+}
