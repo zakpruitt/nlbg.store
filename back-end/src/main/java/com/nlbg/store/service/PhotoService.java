@@ -45,8 +45,8 @@ public class PhotoService {
         return photoRepository.save(itemPhoto);
     }
 
-    public Photo uploadImage(String imageURL, String publicId, Order order, String photoType) throws IOException {
-        Map result = cloudinary.uploader().upload(new File(imageURL), ObjectUtils.asMap(
+    public Photo uploadImage(File file, String publicId, Order order, String photoType) throws IOException {
+        Map result = cloudinary.uploader().upload(file, ObjectUtils.asMap(
                 "public_id", publicId,
                        "tags", order.getId().toString()));
         Photo sellOrderPhoto = new Photo(

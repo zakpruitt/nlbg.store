@@ -61,44 +61,60 @@
         </div>
     </header>
 
-    <form class="order-block rounded-lg">
+    <form action="#" th:action="@{/orders/sell-order}" method="post" th:object="${sellOrderForm}" enctype="multipart/form-data" class="order-block rounded-lg">
         <!-- First Name/Last Name -->
         <div class="row mb-3">
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="text" th:value="${customer.firstName}" class="form-control" id="fNameInput" placeholder="Vincent">
+                    <input type="text" th:field="*{firstName}" th:value="${customer.firstName}" class="form-control" id="fNameInput" placeholder="Vincent">
                     <label for="fNameInput">First Name</label>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="text" th:value="${customer.lastName}" class="form-control" id="lNameInput" placeholder="Parsons">
+                    <input type="text" th:field="*{lastName}" th:value="${customer.lastName}" class="form-control" id="lNameInput" placeholder="Parsons">
                     <label for="lNameInput">Last Name</label>
                 </div>
             </div>
         </div>
 
-        <!-- Email -->
+        <!-- Email and Phone Number -->
+        <div class="row mb-3">
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="email" th:field="*{email}" th:value="${customer.email}" class="form-control" id="emailInput" placeholder="name@example.com">
+                    <label for="emailInput">Email address</label>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="text" th:field="*{phoneNumber}" th:value="${customer.phoneNumber}" class="form-control" id="phoneNumber" placeholder="Parsons">
+                    <label for="phoneNumber">Phone number</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Address -->
         <div class="form-floating mb-3">
-            <input type="email" th:value="${customer.email}" class="form-control" id="emailInput" placeholder="name@example.com">
-            <label for="emailInput">Email address</label>
+            <input type="text" th:field="*{shippingAddress}" th:value="${customer.shippingAddress}" class="form-control" id="shippingInput" placeholder="name@example.com">
+            <label for="emailInput">Your shipping address</label>
         </div>
 
         <!-- Item/Generated Price -->
         <div class="row mb-3">
             <div class="col-6">
                 <div class="form-floating">
-                    <input class="form-control" id="itemInput" list="itemOptions">
+                    <input class="form-control" id="itemInput" list="itemOptions" th:field="*{itemName}">
                     <label for="itemInput">Type or search for your item...</label>
                     <datalist id="itemOptions">
-                        <option th:each="item: ${items}" th:value="${item.itemName}">
+                        <option th:each="kvp: ${items}" th:value="${kvp.key}" th:price="${kvp.value}">
                     </datalist>
                 </div>
             </div>
             <div class="col-6">
                 <div class="input-group h-100">
                     <span class="input-group-text">$</span>
-                    <input type="number" id="priceInput" disabled class="form-control">
+                    <input type="number" id="priceInput" th:field="*{itemPrice}" readonly class="form-control">
                     <span class="input-group-text">.00</span>
                 </div>
             </div>
@@ -107,13 +123,13 @@
         <!-- File Uploading -->
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label float-start">Select photos of the item</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <input class="form-control" type="file" th:field="*{photos}" id="formFileMultiple" multiple>
         </div>
 
         <!-- Comments -->
         <div class="form-floating mb-3">
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                          style="height: 100px"></textarea>
+                          style="height: 100px" th:field="*{comments}"></textarea>
             <label for="floatingTextarea2">Comments about the item</label>
         </div>
 
