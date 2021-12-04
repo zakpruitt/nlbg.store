@@ -11,13 +11,6 @@
   margin-right: auto;
 }
 
-.footer {
-  position: absolute;
-  bottom: 10;
-  width: 100%;
-  text-align: center;
-}
-
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -39,10 +32,6 @@
 
 .img-PredatorLogo {
   border-radius: 50%;
-}
-
-.marketing {
-  margin: 50px;
 }
 
 .cart-bubble:hover {
@@ -84,12 +73,6 @@
 
 .carousel-inner {
   margin-top: 2.5%;
-}
-
-.col {
-  margin-top: 50px;
-  margin-left: 175px;
-  margin-right: 50px;
 }
 
 .headerLogo {
