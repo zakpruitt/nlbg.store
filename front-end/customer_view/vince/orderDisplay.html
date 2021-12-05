@@ -29,7 +29,7 @@
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+              <li><a href="index.html" class="nav-link px-2 link-secondary">Home</a></li>
                 <a href="#" class="nav-link px-2 link-dark" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                   <li><a class="dropdown-item" href="login.html">Predator Cues</a></li>
@@ -64,7 +64,7 @@
                 <li><a class="dropdown-item" href="login.html">Login</a></li>
                 <li><a class="dropdown-item" href="signup.html">Sign Up</a></li>
                 <li><a class="dropdown-item" href="profile.html">Profile</a></li>
-                <li><a class="dropdown-item" href="orderDisplay.html">Orders</a></li>
+                <li><a class="dropdown-item" href="#">Orders</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Sign out</a></li>
               </ul>
@@ -76,53 +76,87 @@
 
     <!-- Body content -->
   <body>
-    <div id="myCarousel" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="rounded">
+                    <div class="table-responsive table-borderless">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <div class="toggle-btn">
+                                            <div class="inner-circle"></div>
+                                        </div>
+                                    </th>
+                                    <th>Order #</th>
+                                    <th>Company name</th>
+                                    <th>status</th>
+                                    <th>Total</th>
+                                    <th>Created</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
+                                <tr class="cell-1">
+                                    <td class="text-center">
+                                        <div class="toggle-btn">
+                                            <div class="inner-circle"></div>
+                                        </div>
+                                    </td>
+                                    <td>#SO-13487</td>
+                                    <td>Gasper Antunes</td>
+                                    <td><span class="badge badge-success">Fullfilled</span></td>
+                                    <td>$2674.00</td>
+                                    <td>Today</td>
+                                    <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                </tr>
+                                <tr class="cell-1">
+                                    <td class="text-center">
+                                        <div class="toggle-btn">
+                                            <div class="inner-circle"></div>
+                                        </div>
+                                    </td>
+                                    <td>#SO-13453</td>
+                                    <td>Aartsen van</td>
+                                    <td><span class="badge badge-info">Confirmed</span></td>
+                                    <td>$3454.00</td>
+                                    <td>Yesterday</td>
+                                    <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                </tr>
+                                <tr class="cell-1">
+                                    <td class="text-center">
+                                        <div class="toggle-btn">
+                                            <div class="inner-circle"></div>
+                                        </div>
+                                    </td>
+                                    <td>#SO-13498</td>
+                                    <td>Trashes Habard</td>
+                                    <td><span class="badge badge-danger">Partially shipped</span></td>
+                                    <td>$6274.00</td>
+                                    <td>May 12,2020</td>
+                                    <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                </tr>
+                                <tr class="cell-1">
+                                    <td class="text-center">
+                                        <div class="toggle-btn">
+                                            <div class="inner-circle"></div>
+                                        </div>
+                                    </td>
+                                    <td>#SO-16499</td>
+                                    <td>Samban Hubart</td>
+                                    <td><span class="badge badge-success">Fullfilled</span></td>
+                                    <td>$6375.00</td>
+                                    <td>May 11,2020</td>
+                                    <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class = "img-slides" src="img/JBcases.jfif" alt="JB cases">
-    
-            <div class="container">
-              <div class="carousel-caption">
-                <p><a class="btn btn-lg btn-primary" href="#">Shop JB cases today!</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img class = "img-slides" src="img/PredatorCues.png" alt="Predator Cues">
-    
-            <div class="container">
-              <div class="carousel-caption">
-                <p><a class="btn btn-lg btn-primary" href="#">Shop Predator cues today!</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img class = "img-slides" src="img/Cuetec.png" alt="Cuetec">
-    
-            <div class="container">
-              <div class="carousel-caption">
-                <p><a class="btn btn-lg btn-primary" href="#">Shop Cuetec products today!</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
-<!--ADD BOOSTRAP FOR BLANK TEMPLATE HERE-->
-
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
