@@ -49,34 +49,34 @@ public class TestConfig {
 //                    "206 Arbor Meadows Ct, Fairview Heights, IL"
 //            );
 //            customerRepository.save(customer);
-
-            Customer customer = customerRepository.findByEmail("zakpruitt5@gmail.com").orElseThrow(() -> new NotFoundException("aa"));
-            System.out.println(Long.toString(Math.round((new Date()).getTime()/1000)));
-            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
+//
+//            Customer customer = customerRepository.findByEmail("zakpruitt5@gmail.com").orElseThrow(() -> new NotFoundException("aa"));
+//            System.out.println(Long.toString(Math.round((new Date()).getTime()/1000)));
+//            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
 //            predatorAirRush.getPhotos().add(photoService.uploadItemImage(
 //                    "C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/a.jpg",
 //                    "super-test",
 //                    predatorAirRush,
 //                    "primary"
 //            ));
-            itemRepository.save(predatorAirRush);
-            Order order = new Order(predatorAirRush, customer, 0);
-            ShippingInformation shippingInformation = new ShippingInformation(true, customer, order);
-            order.setShippingInformation(shippingInformation);
-            orderRepository.save(order);
-            order.getSellOrderPhotos().add(photoService.uploadImage(
-                    "C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/b.jpg",
-                    order.getId().toString() + "1",
-                    order,
-                    "secondary"
-            ));
-            order.getSellOrderPhotos().add(photoService.uploadImage(
-                    "C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/c.jpg",
-                    order.getId().toString() + "2",
-                    order,
-                    "secondary"
-            ));
-            orderRepository.save(order);
+//            itemRepository.save(predatorAirRush);
+//            Order order = new Order(predatorAirRush, customer, 0);
+//            ShippingInformation shippingInformation = new ShippingInformation(true, "123 Based Lane", "125 Test Lane", order);
+//            order.setShippingInformation(shippingInformation);
+//            orderRepository.save(order);
+//            order.getSellOrderPhotos().add(photoService.uploadImage(
+//                    "C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/b.jpg",
+//                    order.getId().toString() + "1",
+//                    order,
+//                    "secondary"
+//            ));
+//            order.getSellOrderPhotos().add(photoService.uploadImage(
+//                    "C:/Program Files (x86)/World of Warcraft/_classic_era_/Screenshots/c.jpg",
+//                    order.getId().toString() + "2",
+//                    order,
+//                    "secondary"
+//            ));
+//            orderRepository.save(order);
 //            Raffle raffle = new Raffle(LocalDate.of(2022, 11, 5),
 //                    LocalDate.of(2022, 11, 6));
 //            RaffleDetail raffleDetail = new RaffleDetail(20, 20, predatorAirRush, raffle);

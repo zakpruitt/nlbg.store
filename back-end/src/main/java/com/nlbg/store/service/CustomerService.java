@@ -23,13 +23,18 @@ public class CustomerService implements UserDetailsService {
     @Autowired
     private ConfirmationTokenService confirmationTokenService;
 
-
     private final String USER_NOT_FOUND = "User with email %s not found.";
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return customerRepository.findByEmail(email).orElseThrow(
                 () -> new UsernameNotFoundException(String.format(USER_NOT_FOUND, email)));
+    }
+
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException(String.format(USER_NOT_FOUND, email))
+        );
     }
 
     public String signUpUser(Customer customer) {

@@ -10,6 +10,7 @@ import com.nlbg.store.repository.PhotoRepository;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -45,8 +46,8 @@ public class PhotoService {
         return photoRepository.save(itemPhoto);
     }
 
-    public Photo uploadImage(String imageURL, String publicId, Order order, String photoType) throws IOException {
-        Map result = cloudinary.uploader().upload(new File(imageURL), ObjectUtils.asMap(
+    public Photo uploadImage(MultipartFile file, String publicId, Order order, String photoType) throws IOException {
+        Map result = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
                 "public_id", publicId,
                        "tags", order.getId().toString()));
         Photo sellOrderPhoto = new Photo(

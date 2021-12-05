@@ -15,22 +15,17 @@ public class ShippingInformation extends AuditModel {
 
     private boolean localPickup;
     private int shippingStatus;
-    private String shippingAddress;
+    private String shippingTo;
+    private String shippingFrom;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_ID", referencedColumnName = "id")
     private Order parentOrder;
 
-    public ShippingInformation(boolean localPickup, Customer customer, Order order) {
+    public ShippingInformation(boolean localPickup, String shippingTo, String shippingFrom, Order order) {
         this.localPickup = localPickup;
-        this.shippingAddress = customer.getShippingAddress();
-        this.parentOrder = order;
-        this.shippingStatus = 0;
-    }
-
-    public ShippingInformation(boolean localPickup, Admin admin, Order order) {
-        this.localPickup = localPickup;
-        this.shippingAddress = admin.getShippingAddress();
+        this.shippingFrom = shippingFrom;
+        this.shippingTo = shippingTo;
         this.parentOrder = order;
         this.shippingStatus = 0;
     }
@@ -62,12 +57,20 @@ public class ShippingInformation extends AuditModel {
         this.shippingStatus = shippingStatus;
     }
 
-    public String getShippingAddress() {
-        return shippingAddress;
+    public String getShippingTo() {
+        return shippingTo;
     }
 
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
+    public void setShippingTo(String shippingTo) {
+        this.shippingTo = shippingTo;
+    }
+
+    public String getShippingFrom() {
+        return shippingFrom;
+    }
+
+    public void setShippingFrom(String shippingFrom) {
+        this.shippingFrom = shippingFrom;
     }
 
     public Order getParentOrder() {
