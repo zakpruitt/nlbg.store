@@ -23,7 +23,6 @@
             <li><a href="index.html" class="nav-link px-2 link-secondary">Home</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">Raffles</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">Orders</a></li>
           </ul>
   
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -60,11 +59,23 @@
 
   <div class="container w-25 login-container shadow-lg p-3 mb-5 bg-white rounded">
     <form>
-      <img class="" src="img/nlbgLogo.png" alt="" width="125" height="125">
+      <img class="mb-3" src="img/nlbgLogo.png" alt="" width="100" height="35">
 
+      <div class="form-floating">
+        <input type="email" class="form-control mb-1" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">First Name</label>
+      </div>
+      <div class="form-floating">
+        <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Last Name</label>
+      </div>
       <div class="form-floating">
         <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Phone Number</label>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control mb-1" id="floatingPassword" placeholder="Password">
@@ -82,7 +93,7 @@
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Billing Address</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
+      <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign Up</button>
 
       <p class="text-center mt-3">Don't have an account? <a href="signup.html">Sign up here</a></p>
     </form>
