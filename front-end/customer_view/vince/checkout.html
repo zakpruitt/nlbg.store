@@ -95,64 +95,75 @@
   <!-- Body content -->
 
   <body>
-    <div id="myCarousel" class="carousel slide text-white rounded" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-          aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="img-slides rounded" src="img/JBcases.jfif" alt="JB cases">
-          <div class="carousel-caption">
-            <p><a class="btn btn-lg btn-primary" href="#">Shop JB cases today!</a></p>
-          </div>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h4><b>Shopping Cart</b></h4>
+                        </div>
+                        <div class="col align-self-center text-right text-muted">3 items</div>
+                    </div>
+                </div>
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                        <div class="col">
+                            <div class="row text-muted">Shirt</div>
+                            <div class="row">Cotton T-shirt</div>
+                        </div>
+                        <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
+                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
+                        <div class="col">
+                            <div class="row text-muted">Shirt</div>
+                            <div class="row">Cotton T-shirt</div>
+                        </div>
+                        <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
+                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                    </div>
+                </div>
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                        <div class="col">
+                            <div class="row text-muted">Shirt</div>
+                            <div class="row">Cotton T-shirt</div>
+                        </div>
+                        <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
+                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                    </div>
+                </div>
+                <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div>
+                    <h5><b>Summary</b></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;">ITEMS 3</div>
+                    <div class="col text-right">&euro; 132.00</div>
+                </div>
+                <form>
+                    <p>SHIPPING</p> <select>
+                        <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                    </select>
+                    <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
+                </form>
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right">&euro; 137.00</div>
+                </div> <button class="checkoutbtn">CHECKOUT</button>
+            </div>
         </div>
-      </div>
-      <div class="carousel-item">
-        <img class="img-slides rounded" src="img/PredatorCues.png" alt="Predator Cues">
-
-
-        <div class="carousel-caption">
-          <p><a class="btn btn-lg btn-primary" href="#">Shop Predator cues today!</a></p>
-        </div>
-
-      </div>
-      <div class="carousel-item">
-        <img class="img-slides rounded" src="img/Cuetec.png" alt="Cuetec">
-
-
-        <div class="carousel-caption">
-          <p><a class="btn btn-lg btn-primary" href="#">Shop Cuetec products today!</a></p>
-        </div>
-
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-    <div class="mb-4 text-white rounded bg-dark mt-5">
-      <div class="col-md-6 px-0">
-        <h1 class="display-4 fst-italic">NEWEST ARRIVALS</h1>
-      </div>
-    </div>
-
-    <div class="row container w-100 login-container shadow-lg mb-5 bg-white rounded">
-      <div class="column">
-        <p>Introducing the Predator Air Rush jump cue with Air REVO carbon fiber composite shaft. It makes jumping effortless. The Air Rush is an advancement validated and embraced by professional pool players around the world and stands at the apex of precision and performance.</p>
-        <img class="img-slides rounded" src="img/airRush.jpg" style="width:100%">
-      </div>
-      <div class="column">
-        <p>Give yourself a chance to rule the table with Predator Throne cues from FCI Billiards. Created with a highly dynamic look and feel in mind, the second generation of the Predator Throne series utilizes every bit of technology Predator has to offer. Each Predator Throne cue comes standard with a 4-piece core that's instantly noticeable.</p>
-        <img class="img-slides rounded" src="img/PRED-THRONE-2-SLIDER.png" style="width:100%">
-      </div>
-    </div>
+  </body>
 
 <footer>
   <p class="m-0 text-center">&copy; 2021 Company, Inc</p>
