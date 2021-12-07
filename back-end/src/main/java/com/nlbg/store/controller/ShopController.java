@@ -37,6 +37,11 @@ public class ShopController {
         return "shop";
     }
 
+    @GetMapping("/test")
+    public String renderShopa(Principal principal, Model model) {
+        return "test1";
+    }
+
     @GetMapping("/{orderId}")
     public String renderPhotos(@PathVariable Long orderId, Model model) {
         try {

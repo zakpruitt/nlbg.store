@@ -2,12 +2,16 @@ package com.nlbg.store.controller;
 
 import com.nlbg.store.domain.Item.Item;
 import com.nlbg.store.domain.Order.Order;
+import com.nlbg.store.domain.Order.PaypalOrderForm;
 import com.nlbg.store.domain.Order.SellOrderForm;
 import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.service.CustomerService;
 import com.nlbg.store.service.ItemService;
 import com.nlbg.store.service.OrderService;
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +36,12 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    public static final String SUCCESS_URL = "orders/success";
+    public static final String CANCEL_URL = "orders/cancel";
+
+
     @GetMapping("/sell-order")
-    public String renderCreateSellOrder(Principal principal, Model model) {
+    public String renderCreateSellOrderForm(Principal principal, Model model) {
         Customer customer = customerService.getCustomerByEmail(principal.getName());
         Hashtable<String, Double> itemPrice = itemService.getAllItemPrice();
         SellOrderForm sellOrderForm = new SellOrderForm();
@@ -51,6 +59,49 @@ public class OrderController {
             orderService.createSellOrder(sellOrderForm, customer);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/pay")
+    public String facilitatePayment(@ModelAttribute("paypalOrderForm")PaypalOrderForm paypalOrderForm) {
+        try {
+            Payment payment = orderService.createPayment(
+                    paypalOrderForm.getPrice(),
+                    paypalOrderForm.getCurrency(),
+                    paypalOrderForm.getMethod(),
+                    paypalOrderForm.getIntent(),
+                    paypalOrderForm.getDescription(),
+                    "http://localhost:8080/" + CANCEL_URL,
+                    "http://localhost:8080/" + SUCCESS_URL
+                    );
+            for (Links link : payment.getLinks()) {
+                if (link.getRel().equals("approval_url")) {
+                    return "redirect:" + link.getHref();
+                }
+            }
+        } catch (PayPalRESTException e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/cancel")
+    public String cancelPay() {
+        return "cancel";
+    }
+
+    @GetMapping("/success")
+    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+        try {
+            Payment payment = orderService.executePayment(paymentId, payerId);
+            System.out.println(payment.toJSON());
+            if (payment.getState().equals("approved")) {
+                return "success";
+            }
+        } catch (PayPalRESTException e) {
+            System.out.println(e.getMessage());
         }
         return "redirect:/";
     }
