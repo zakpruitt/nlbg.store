@@ -23,8 +23,7 @@ public class Item extends AuditModel {
 
     @NotEmpty(message = "Item Name is required.")
     private String itemName;
-    @NotNull
-    private double itemDesiredValue;
+    private Double itemDesiredValue;
     @Nullable
     private double itemAverageValue;
     @NotNull
@@ -79,11 +78,11 @@ public class Item extends AuditModel {
         this.itemName = itemName;
     }
 
-    public double getItemDesiredValue() {
+    public Double getItemDesiredValue() {
         return itemDesiredValue;
     }
 
-    public void setItemDesiredValue(double itemDesiredValue) {
+    public void setItemDesiredValue(Double itemDesiredValue) {
         this.itemDesiredValue = itemDesiredValue;
     }
 

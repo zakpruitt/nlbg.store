@@ -62,6 +62,7 @@ public class ShopController {
         Customer customer = customerService.getCustomerByEmail(principal.getName());
         model.addAttribute("shoppingCart", shoppingCartService.getProducts());
         model.addAttribute("shoppingCartSize", shoppingCartService.getCartSize());
+        model.addAttribute("shoppingCartTotal", shoppingCartService.getTotal());
         model.addAttribute("customer", customer);
         return "checkout";
     }

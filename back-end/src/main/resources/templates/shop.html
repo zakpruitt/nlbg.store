@@ -76,11 +76,13 @@
             </ul>
 
             <div class="col-md-3 text-end">
-                <button class="btn btn-outline-success" type="submit">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span class="badge cart-bubble bg-success text-white ms-1 rounded-pill">[[${shoppingCartSize}]]</span>
-                </button>
+                <a th:href="@{/checkout}">
+                    <button class="btn btn-outline-success" type="button">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge cart-bubble bg-success text-white ms-1 rounded-pill">[[${shoppingCartSize}]]</span>
+                    </button>
+                </a>
                 <a th:href="@{/logout}">
                     <button type="button" class="btn btn-
                     -primary me-2">Sign Out</button>

@@ -64,8 +64,8 @@ public class OrderController {
         try {
             Payment payment = orderService.createPayment(
                     paypalOrderForm.getPrice(),
-                    "http://localhost:8080/orders/success",
-                    "http://localhost:8080/orders/cancel"
+                    "http://localhost:8080/orders/cancel",
+                    "http://localhost:8080/orders/success"
                     );
             for (Links link : payment.getLinks()) {
                 if (link.getRel().equals("approval_url")) {
@@ -75,7 +75,6 @@ public class OrderController {
         } catch (PayPalRESTException e) {
             e.printStackTrace();
         }
-
         return "redirect:/";
     }
 

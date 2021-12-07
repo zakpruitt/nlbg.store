@@ -60,7 +60,8 @@
     </div>
   </header>
 
-  <main>
+  <!-- Content -->
+  <form class="needs-validation" method="post" action="/orders/pay" novalidate>
     <div class="row g-5">
       <!-- Shopping Cart -->
       <div class="col-md-5 col-lg-4 order-md-last">
@@ -77,65 +78,74 @@
             <span class="text-success float-end"
                   th:with="result=${kvp.key.itemDesiredValue * kvp.value}">$[[${result}]]</span>
           </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Total</h6>
+            </div>
+            <span class="text-success float-end">$[[${shoppingCartTotal}]]</span>
+            <input hidden th:value="${shoppingCartTotal}" name="price" type="text">
+          </li>
         </ul>
 
-        <form class="card p-2">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Promo code">
-            <button type="submit" class="btn btn-secondary">Redeem</button>
-          </div>
-        </form>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Promo code">
+          <button type="submit" class="btn btn-secondary">Redeem</button>
+        </div>
       </div>
       <!-- Form -->
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
           <!-- Form -->
           <div class="row g-3">
+            <!-- First Name -->
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="Vincent" value="" required>
+              <input type="text" class="form-control" id="firstName" placeholder="Vincent" th:value="${customer.firstName}" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
             </div>
 
+            <!-- Last Name -->
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="Parsons" value="" required>
+              <input type="text" class="form-control" id="lastName" placeholder="Parsons" th:value="${customer.lastName}" required>
               <div class="invalid-feedback">
                 Valid last name is required.
               </div>
             </div>
 
+            <!-- Email -->
             <div class="col-12">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" th:value="${customer.email}">
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
             </div>
 
+            <!-- Address -->
             <div class="col-12">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required th:value="${customer.shippingAddress}">
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
             </div>
 
+            <!-- City -->
             <div class="col-12">
               <label for="address" class="form-label">City</label>
-              <input type="text" class="form-control" id="city" placeholder="Evansville" required>
+              <input type="text" class="form-control" id="city" placeholder="Evansville" th:value="${customer.shippingCity}" required>
               <div class="invalid-feedback">
                 Please enter your shipping city.
               </div>
             </div>
 
+            <!-- Country -->
             <div class="col-md-5">
               <label for="country" class="form-label">Country</label>
               <select class="form-select" id="country" required>
-                <option value="">Choose...</option>
                 <option>United States</option>
               </select>
               <div class="invalid-feedback">
@@ -143,19 +153,20 @@
               </div>
             </div>
 
+            <!-- State -->
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
               <select class="form-select" id="state" required>
-                <option value="">Choose...</option>
               </select>
               <div class="invalid-feedback">
                 Please provide a valid state.
               </div>
             </div>
 
+            <!-- Zip -->
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
+              <input type="text" class="form-control" id="zip" placeholder="" th:value="${customer.shippingZip}" required>
               <div class="invalid-feedback">
                 Zip code required.
               </div>
@@ -165,16 +176,17 @@
           <hr class="my-4">
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to PayPal</button>
-        </form>
       </div>
     </div>
-  </main>
+  </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script th:src="@{/js/scripts.js}"></script>
 </body>
 
 </html>

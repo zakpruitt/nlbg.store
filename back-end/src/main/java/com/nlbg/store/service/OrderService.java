@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -34,6 +35,8 @@ public class OrderService {
     private ItemService itemService;
     @Autowired
     private PhotoService photoService;
+    @Autowired
+    private ShoppingCartService shoppingCartService;
 
     public void createSellOrder(SellOrderForm sellOrderForm, Customer customer) throws IOException {
         Item item = itemService.getItemByName(sellOrderForm.getItemName());
@@ -72,16 +75,16 @@ public class OrderService {
         Transaction transaction = new Transaction();
 
         ItemList itemList = new ItemList();
-        List<com.paypal.api.payments.Item> a = new ArrayList<>();
-
-        com.paypal.api.payments.Item i = new com.paypal.api.payments.Item();
-        i.setCurrency("USD");
-        i.setName("Predator Air Rush");
-        i.setPrice("10");
-        i.setQuantity("1");
-
-        a.add(i);
-        itemList.setItems(a);
+        List<com.paypal.api.payments.Item> items = new ArrayList<>();
+        for (Map.Entry<Item, Integer> kvp : shoppingCartService.getProducts().entrySet()) {
+            com.paypal.api.payments.Item item = new com.paypal.api.payments.Item();
+            item.setCurrency("USD");
+            item.setName(kvp.getKey().getItemName());
+            item.setPrice(kvp.getKey().getItemDesiredValue().toString());
+            item.setQuantity(kvp.getValue().toString());
+            items.add(item);
+        }
+        itemList.setItems(items);
 
         transaction.setItemList(itemList);
         transaction.setAmount(amount);

@@ -52,16 +52,13 @@ public class ShoppingCartService {
         return products;
     }
 
-    public Map<Item, Integer> getProductsInCart() {
-        return Collections.unmodifiableMap(products);
+    public BigDecimal getTotal() {
+        BigDecimal total = new BigDecimal(0);
+        for (Map.Entry<Item, Integer> entry : products.entrySet()) {
+            BigDecimal currentPrice = new BigDecimal(entry.getKey().getItemDesiredValue());
+            currentPrice = currentPrice.multiply(BigDecimal.valueOf(entry.getValue()));
+            total = total.add(currentPrice);
+        }
+        return total;
     }
-
-
-
-    //    public BigDecimal getTotal() {
-//        return products.entrySet().stream()
-//                .map(entry -> entry.getKey().getItemDesiredValue().multiply(BigDecimal.valueOf(entry.getValue())))
-//                .reduce(BigDecimal::add)
-//                .orElse(BigDecimal.ZERO);
-//    }
 }
