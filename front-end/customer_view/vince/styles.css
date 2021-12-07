@@ -76,15 +76,8 @@
   margin-right: 100px;
   width: 100%;
 }
-body {
-  background: rgb(255, 255, 255)
+
+.column {
+  width:50%;
 }
-
-.profile-button {
-  background: rgb(24, 9, 245);
-  box-shadow: none;
-  border: none
-}
-
-
 
