@@ -37,7 +37,10 @@ public class PhotoService {
             ));
 
     public Photo uploadImage(String imageURL, String publicId, Item item, String photoType) throws IOException {
-        Map result = cloudinary.uploader().upload(new File(imageURL), ObjectUtils.asMap("public_id", publicId));
+        Map result = cloudinary.uploader().upload(new File(imageURL), ObjectUtils.asMap(
+                "public_id", publicId,
+                "tags", item.getId().toString()
+        ));
         Photo itemPhoto = new Photo(
                 result.get("secure_url").toString(),
                 photoType,

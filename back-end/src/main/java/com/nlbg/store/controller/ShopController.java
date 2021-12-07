@@ -44,6 +44,17 @@ public class ShopController {
         return "shop";
     }
 
+    @GetMapping("/{itemId}")
+    public String renderProductShowcase(@PathVariable Long itemId, Model model) {
+        try {
+            Item item = itemService.getItemById(itemId);
+            model.addAttribute("item", item);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return "item";
+    }
+
     @GetMapping("/checkout")
     public void renderCheckout() {
 
@@ -56,10 +67,10 @@ public class ShopController {
         return "redirect:/";
     }
 
-    @PostMapping
-    public void removeFromCart(@ModelAttribute("shoppingCartInput") ShoppingCartInput shoppingCartInput) {
-
-    }
+//    @PostMapping
+//    public void removeFromCart(@ModelAttribute("shoppingCartInput") ShoppingCartInput shoppingCartInput) {
+//
+//    }
 
 
 
@@ -70,7 +81,7 @@ public class ShopController {
         return "test1";
     }
 
-    @GetMapping("/{orderId}")
+    @GetMapping("/photo/{orderId}")
     public String renderPhotos(@PathVariable Long orderId, Model model) {
         try {
             Order order = orderRepository.findById(orderId)
