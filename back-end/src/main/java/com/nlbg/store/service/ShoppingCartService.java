@@ -48,11 +48,17 @@ public class ShoppingCartService {
         return count;
     }
 
+    public Map<Item, Integer> getProducts() {
+        return products;
+    }
+
     public Map<Item, Integer> getProductsInCart() {
         return Collections.unmodifiableMap(products);
     }
 
-//    public BigDecimal getTotal() {
+
+
+    //    public BigDecimal getTotal() {
 //        return products.entrySet().stream()
 //                .map(entry -> entry.getKey().getItemDesiredValue().multiply(BigDecimal.valueOf(entry.getValue())))
 //                .reduce(BigDecimal::add)

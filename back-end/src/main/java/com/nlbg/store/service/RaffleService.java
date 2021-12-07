@@ -26,8 +26,6 @@ public class RaffleService {
     RaffleDetailRepository raffleDetailRepository;
     @Autowired
     RaffleCustomerRepository raffleCustomerRepository;
-    @Autowired
-    CustomerRepository customerRepository;
 
     public List<Raffle> getAllRaffleURLs() {
         return raffleRepository.findAll();

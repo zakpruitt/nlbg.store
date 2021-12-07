@@ -38,6 +38,9 @@ public class RegistrationService {
                         request.getEmail(),
                         request.getPhoneNumber(),
                         request.getShippingAddress(),
+                        request.getShippingCity(),
+                        request.getShippingState(),
+                        request.getShippingZip(),
                         request.getBillingAddress()
                 )
         );

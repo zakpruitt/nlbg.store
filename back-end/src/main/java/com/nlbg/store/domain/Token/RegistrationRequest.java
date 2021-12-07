@@ -12,15 +12,21 @@ public class RegistrationRequest {
     private final String password;
     private final String phoneNumber;
     private final String shippingAddress;
+    private String shippingCity;
+    private final String shippingState;
+    private final String shippingZip;
     private final String billingAddress;
 
-    public RegistrationRequest(String firstName, String lastName, String email, String password, String phoneNumber, String shippingAddress, String billingAddress) {
+    public RegistrationRequest(String firstName, String lastName, String email, String password, String phoneNumber, String shippingAddress, String shippingCity, String shippingState, String shippingZip, String billingAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.shippingAddress = shippingAddress;
+        this.shippingCity = shippingCity;
+        this.shippingState = shippingState;
+        this.shippingZip = shippingZip;
         this.billingAddress = billingAddress;
     }
 
@@ -46,6 +52,18 @@ public class RegistrationRequest {
 
     public String getShippingAddress() {
         return shippingAddress;
+    }
+
+    public String getShippingCity() {
+        return shippingCity;
+    }
+
+    public String getShippingState() {
+        return shippingState;
+    }
+
+    public String getShippingZip() {
+        return shippingZip;
     }
 
     public String getBillingAddress() {

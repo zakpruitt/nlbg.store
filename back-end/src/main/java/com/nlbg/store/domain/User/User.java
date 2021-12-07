@@ -34,8 +34,10 @@ public abstract class User extends AuditModel implements UserDetails {
     protected Boolean enabled;
     @Pattern(regexp="(^$|[0-9]{10})")
     protected String phoneNumber;
-    @NotNull(message = "Shipping Address is required.")
     protected String shippingAddress;
+    protected String shippingCity;
+    protected String shippingState;
+    protected String shippingZip;
     @NotNull(message = "Billing Address is required.")
     protected String billingAddress;
 
@@ -71,6 +73,31 @@ public abstract class User extends AuditModel implements UserDetails {
         this.email = email;
     }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -87,21 +114,36 @@ public abstract class User extends AuditModel implements UserDetails {
         this.shippingAddress = shippingAddress;
     }
 
+    public String getShippingCity() {
+        return shippingCity;
+    }
+
+    public void setShippingCity(String shippingCity) {
+        this.shippingCity = shippingCity;
+    }
+
+    public String getShippingState() {
+        return shippingState;
+    }
+
+    public void setShippingState(String shippingState) {
+        this.shippingState = shippingState;
+    }
+
+    public String getShippingZip() {
+        return shippingZip;
+    }
+
+    public void setShippingZip(String shippingZip) {
+        this.shippingZip = shippingZip;
+    }
+
     public String getBillingAddress() {
         return billingAddress;
     }
 
     public void setBillingAddress(String billingAddress) {
         this.billingAddress = billingAddress;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override

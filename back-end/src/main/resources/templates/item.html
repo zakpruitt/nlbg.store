@@ -60,7 +60,7 @@
                 -primary me-2">Sign Out</button>
         </div>
     </header>
-    <form th:object="${shoppingCartInput}" method="post" th:action="@{/add}">
+    <form method="post" th:action="@{/add}">
         <div class="row product-margin">
                 <!-- Item Image Side -->
                 <div class="col-6">
@@ -146,7 +146,7 @@
                         </select>
                     </div>
 
-                    <input type="text" th:value="${item.itemName}" hidden th:name="*{itemName}" th:id="name"/>
+                    <input type="text" th:value="${item.itemName}" hidden th:name="name" th:id="name"/>
                     <button type="submit" class="btn btn-lg btn-success float-end inline">Add to cart</button>
                 </div>
         </div>

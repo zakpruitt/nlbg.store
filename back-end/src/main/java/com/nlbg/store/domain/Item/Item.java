@@ -144,4 +144,24 @@ public class Item extends AuditModel {
     public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
     }
+
+    @Override
+    public String toString() {
+        return itemName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+
+        Item item = (Item) o;
+
+        return getId().equals(item.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }
