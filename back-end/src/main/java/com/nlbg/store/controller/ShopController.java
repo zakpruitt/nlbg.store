@@ -38,6 +38,7 @@ public class ShopController {
     public String renderShop(Principal principal, Model model) {
         if (principal != null) {
             model.addAttribute("email", principal.getName());
+            model.addAttribute("shoppingCartSize", shoppingCartService.getCartSize());
         } else {
             model.addAttribute("email", "NONE");
         }
@@ -48,7 +49,9 @@ public class ShopController {
     public String renderProductShowcase(@PathVariable Long itemId, Model model) {
         try {
             Item item = itemService.getItemById(itemId);
+            ShoppingCartInput shoppingCartInput = new ShoppingCartInput();
             model.addAttribute("item", item);
+            model.addAttribute("shoppingCartInput", shoppingCartInput);
         } catch (NotFoundException e) {
             e.printStackTrace();
         }
@@ -60,10 +63,10 @@ public class ShopController {
 
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String addToCart(@ModelAttribute("shoppingCartInput") ShoppingCartInput shoppingCartInput) {
         Item item = itemService.getItemByName(shoppingCartInput.getItemName());
-        shoppingCartService.addProduct(item, shoppingCartInput.getQuantity());
+        shoppingCartService.addProduct(item);
         return "redirect:/";
     }
 

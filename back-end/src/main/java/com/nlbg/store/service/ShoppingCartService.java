@@ -22,11 +22,11 @@ public class ShoppingCartService {
     private ItemService itemService;
     private Map<Item, Integer> products = new HashMap<>();
 
-    public void addProduct(Item item, Integer quantity) {
+    public void addProduct(Item item) {
         if (products.containsKey(item)) {
-            products.replace(item, products.get(item) + quantity);
+            products.replace(item, products.get(item) + 1);
         } else {
-            products.put(item, quantity);
+            products.put(item, 1);
         }
     }
 
@@ -38,6 +38,14 @@ public class ShoppingCartService {
                 products.remove(item);
             }
         }
+    }
+
+    public Integer getCartSize() {
+        Integer count = 0;
+        for (Map.Entry<Item, Integer> entry : products.entrySet()) {
+            count += entry.getValue();
+        }
+        return count;
     }
 
     public Map<Item, Integer> getProductsInCart() {

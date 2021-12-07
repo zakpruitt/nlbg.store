@@ -60,95 +60,97 @@
                 -primary me-2">Sign Out</button>
         </div>
     </header>
-
-    <div class="row product-margin">
-        <!-- Item Image Side -->
-        <div class="col-6">
-            <div id="carouselExampleIndicators" class="carousel carousel-dark slide shadow p-2 mb-5"
-                 data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div th:each="photo,iter: ${item.photos}" th:class="${iter.index} == 0 ? 'carousel-item active' : 'carousel-item'">
-                        <img th:src="${photo.secureURL}" class="d-block w-100" alt="...">
+    <form th:object="${shoppingCartInput}" method="post" th:action="@{/add}">
+        <div class="row product-margin">
+                <!-- Item Image Side -->
+                <div class="col-6">
+                    <div id="carouselExampleIndicators" class="carousel carousel-dark slide shadow p-2 mb-5"
+                         data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div th:each="photo,iter: ${item.photos}" th:class="${iter.index} == 0 ? 'carousel-item active' : 'carousel-item'">
+                                <img th:src="${photo.secureURL}" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-        <!-- Item Side -->
-        <div class="col-6">
-            <h2 class="text-primary">[[${item.itemName}]]</h2>
-            <p class="product-category-p text-secondary">[[${item.category.categoryName}]]</p>
+                <!-- Item Side -->
+                <div class="col-6">
+                    <h2 class="text-primary" name="">[[${item.itemName}]]</h2>
+                    <p class="product-category-p text-secondary">[[${item.category.categoryName}]]</p>
 
-            <h4 class="text-success inline">Now $[[${item.itemDesiredValue}]]</h4>
-            <h4 class="text-danger text-decoration-line-through ms-2 mb-3 inline"
-                th:with="result=${item.itemDesiredValue + 50}">$[[${result}]]</h4>
+                    <h4 class="text-success inline">Now $[[${item.itemDesiredValue}]]</h4>
+                    <h4 class="text-danger text-decoration-line-through ms-2 mb-3 inline"
+                        th:with="result=${item.itemDesiredValue + 50}">$[[${result}]]</h4>
 
-            <div class="form-check mb-3">
-                <div th:if="${item.quantityBought} > 0">
-                    <input class="form-check-input" type="checkbox" id="flexCheckChecked" disabled checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        In stock
-                    </label>
+                    <div class="form-check mb-3">
+                        <div th:if="${item.quantityBought} > 0">
+                            <input class="form-check-input" type="checkbox" id="flexCheckChecked" disabled checked>
+                            <label class="form-check-label" for="flexCheckChecked">
+                                In stock
+                            </label>
+                        </div>
+                        <div th:if="${item.quantityBought} == 0">
+                            <input class="form-check-input" type="checkbox" id="flexCheckNotChecked" disabled>
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Out of stock
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="exampleFormControlSelect1">Choose Extras:</label>
+                        <select id="exampleFormControlSelect1" class="form-select mb-2" aria-label="Default select example">
+                            <option selected>No thanks</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <label for="exampleFormControlSelect2">Tip Upgrade:</label>
+                        <select id="exampleFormControlSelect2" class="form-select mb-2" aria-label="Default select example">
+                            <option selected>No thanks</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <label for="exampleFormControlSelect3">Wrap Options:</label>
+                        <select id="exampleFormControlSelect3" class="form-select mb-2" aria-label="Default select example">
+                            <option selected>No thanks</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <label for="exampleFormControlSelect4">Custom Engraving:</label>
+                        <select id="exampleFormControlSelect4" class="form-select mb-2" aria-label="Default select example">
+                            <option selected>No thanks</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+
+                    <input type="text" th:value="${item.itemName}" hidden th:name="*{itemName}" th:id="name"/>
+                    <button type="submit" class="btn btn-lg btn-success float-end inline">Add to cart</button>
                 </div>
-                <div th:if="${item.quantityBought} == 0">
-                    <input class="form-check-input" type="checkbox" id="flexCheckNotChecked" disabled>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Out of stock
-                    </label>
-                </div>
-            </div>
-
-            <div class="mb-5">
-                <label for="exampleFormControlSelect1">Choose Extras:</label>
-                <select id="exampleFormControlSelect1" class="form-select mb-2" aria-label="Default select example">
-                    <option selected>No thanks</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <label for="exampleFormControlSelect2">Tip Upgrade:</label>
-                <select id="exampleFormControlSelect2" class="form-select mb-2" aria-label="Default select example">
-                    <option selected>No thanks</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <label for="exampleFormControlSelect3">Wrap Options:</label>
-                <select id="exampleFormControlSelect3" class="form-select mb-2" aria-label="Default select example">
-                    <option selected>No thanks</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <label for="exampleFormControlSelect4">Custom Engraving:</label>
-                <select id="exampleFormControlSelect4" class="form-select mb-2" aria-label="Default select example">
-                    <option selected>No thanks</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-lg btn-success float-end inline">Add to cart</button>
         </div>
-    </div>
+    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
