@@ -1,18 +1,20 @@
 package com.nlbg.store.controller;
 
+import com.nlbg.store.domain.Item.Item;
+import com.nlbg.store.domain.Item.ShoppingCartInput;
 import com.nlbg.store.domain.Order.Order;
 import com.nlbg.store.domain.Photo.Photo;
 import com.nlbg.store.domain.Raffle.Raffle;
 import com.nlbg.store.domain.Raffle.RaffleDetail;
 import com.nlbg.store.repository.OrderRepository;
+import com.nlbg.store.service.ItemService;
 import com.nlbg.store.service.PhotoService;
+import com.nlbg.store.service.ShoppingCartService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -21,6 +23,11 @@ import java.util.HashMap;
 
 @Controller
 public class ShopController {
+
+    @Autowired
+    ItemService itemService;
+    @Autowired
+    ShoppingCartService shoppingCartService;
 
     @Autowired
     OrderRepository orderRepository;
@@ -36,6 +43,27 @@ public class ShopController {
         }
         return "shop";
     }
+
+    @GetMapping("/checkout")
+    public void renderCheckout() {
+
+    }
+
+    @PostMapping
+    public String addToCart(@ModelAttribute("shoppingCartInput") ShoppingCartInput shoppingCartInput) {
+        Item item = itemService.getItemByName(shoppingCartInput.getItemName());
+        shoppingCartService.addProduct(item, shoppingCartInput.getQuantity());
+        return "redirect:/";
+    }
+
+    @PostMapping
+    public void removeFromCart(@ModelAttribute("shoppingCartInput") ShoppingCartInput shoppingCartInput) {
+
+    }
+
+
+
+    // *************************************************************************************
 
     @GetMapping("/test")
     public String renderShopa(Principal principal, Model model) {

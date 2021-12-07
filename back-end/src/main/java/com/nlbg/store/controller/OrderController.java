@@ -36,10 +36,6 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    public static final String SUCCESS_URL = "orders/success";
-    public static final String CANCEL_URL = "orders/cancel";
-
-
     @GetMapping("/sell-order")
     public String renderCreateSellOrderForm(Principal principal, Model model) {
         Customer customer = customerService.getCustomerByEmail(principal.getName());
@@ -68,12 +64,8 @@ public class OrderController {
         try {
             Payment payment = orderService.createPayment(
                     paypalOrderForm.getPrice(),
-                    paypalOrderForm.getCurrency(),
-                    paypalOrderForm.getMethod(),
-                    paypalOrderForm.getIntent(),
-                    paypalOrderForm.getDescription(),
-                    "http://localhost:8080/" + CANCEL_URL,
-                    "http://localhost:8080/" + SUCCESS_URL
+                    "http://localhost:8080/orders/success",
+                    "http://localhost:8080/orders/cancel"
                     );
             for (Links link : payment.getLinks()) {
                 if (link.getRel().equals("approval_url")) {
