@@ -70,6 +70,20 @@ public class OrderService {
         amount.setTotal(String.format("%.2f", total));
 
         Transaction transaction = new Transaction();
+
+        ItemList itemList = new ItemList();
+        List<com.paypal.api.payments.Item> a = new ArrayList<>();
+
+        com.paypal.api.payments.Item i = new com.paypal.api.payments.Item();
+        i.setCurrency("USD");
+        i.setName("Predator Air Rush");
+        i.setPrice("10");
+        i.setQuantity("1");
+
+        a.add(i);
+        itemList.setItems(a);
+
+        transaction.setItemList(itemList);
         transaction.setDescription(description);
         transaction.setAmount(amount);
 
@@ -80,7 +94,8 @@ public class OrderService {
         payer.setPaymentMethod(method);
 
         Payment payment = new Payment();
-        payment.setIntent(intent);
+        payment.setIntent("sale");
+
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();
