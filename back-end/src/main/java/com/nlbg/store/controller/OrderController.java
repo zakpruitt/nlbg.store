@@ -43,6 +43,7 @@ public class OrderController {
     public String renderOrders(Principal principal, Model model) {
         Customer customer = customerService.getCustomerByEmail(principal.getName());
         List<Order> orders = orderService.getAllByCustomer(customer);
+        System.out.println(orders);
         model.addAttribute("orders", orders);
         return "order_display";
     }

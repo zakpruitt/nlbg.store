@@ -85,8 +85,9 @@
             <tbody class="align-middle">
               <tr th:each="kvp : ${namePositions}">
                 <form th:action="'/raffles/' + ${raffle.URL} + '/join'" method="post">
-                    <th scope="row" name="position" th:text="${kvp.key}"></th>
+                    <th scope="row" th:text="${kvp.key}"></th>
                     <td th:text="${kvp.value} ?: ''"></td>
+                    <input hidden name="position" th:value="${kvp.key}">
                     <td>
                         <button type="submit"
                                 th:class="${kvp.value == null} ? 'btn btn-success' : 'btn btn-secondary disabled'"

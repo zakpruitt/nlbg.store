@@ -43,8 +43,16 @@ public class OrderService {
     @Autowired
     private ShippingInformationService shippingInformationService;
 
+    public List<Order> getAllSellOrders() {
+        return orderRepository.findAllSellOrders();
+    }
+
+    public List<Order> getAllPurchaseOrders() {
+        return orderRepository.findAllPurchaseOrders();
+    }
+
     public List<Order> getAllByCustomer(Customer customer) {
-        return orderRepository.findAllByCustomerId(customer);
+        return orderRepository.findAllByCustomerId(customer.getId());
     }
 
     public void createSellOrder(SellOrderForm sellOrderForm, Customer customer) throws IOException {
@@ -54,7 +62,7 @@ public class OrderService {
             //item = new Item(sellOrderForm.getItemName(), sellOrderForm.getItemPrice(), );
         }
 
-        Order order = new Order(item, customer, 0, "sell", sellOrderForm.getComments(), sellOrderForm.getItemPrice());
+        Order order = new Order(item, customer, 0, "Sell", sellOrderForm.getComments(), sellOrderForm.getItemPrice());
         // TODO: Handle local pickup.
         ShippingInformation shippingInformation = new ShippingInformation(
                 "3608 Quarry Ridge Dr.",
@@ -141,7 +149,7 @@ public class OrderService {
 
             // purchase order (customer buying)
             for (int i = 0; i < kvp.getValue(); i++) {
-                Order order = new Order(currentItem, customer, 4, "purchase", paypalOrderForm.getPrice());
+                Order order = new Order(currentItem, customer, 4, "Purchase", paypalOrderForm.getPrice());
                 ShippingInformation shippingInformation = new ShippingInformation(
                         paypalOrderForm.getShippingAddress(),
                         paypalOrderForm.getShippingCountry(),

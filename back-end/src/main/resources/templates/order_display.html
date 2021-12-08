@@ -83,7 +83,7 @@
                             </thead>
                             <tbody class="table-body">
                                 <tr th:each="order: ${orders}" class="cell-1 text-center">
-                                    <td>[[${order.id}]]</td>
+                                    <td>[[${order.orderGroupId}]]</td>
                                     <td>[[${order.orderType}]]</td>
                                     <td th:switch="${order.orderStatus}">
                                         <div th:case="'0'">
@@ -106,7 +106,7 @@
                                         </div>
                                     </td>
                                     <td>$[[${order.total}]]</td>
-                                    <td>[[${order.shippingInformation.shippingLabelURL}]]</td>
+                                    <td><a th:href="${order.shippingInformation.shippingLabelURL}">Open Label</a>
                                     <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
                                 </tr>
                             </tbody>
