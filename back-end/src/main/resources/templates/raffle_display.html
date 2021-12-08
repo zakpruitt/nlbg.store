@@ -27,7 +27,7 @@
     <div class="container">
         <!-- Logged in bar -->
         <header
-            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
                     <use xlink:href="#bootstrap" />
@@ -35,28 +35,32 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="shop.html" class="nav-link px-2 link-dark">Shop</a></li>
-                <li><a href="#" class="nav-link px-2 link-secondary">Raffles</a></li>
+                <li><a th:href="@{/}" class="nav-link px-2 link-secondary">Shop</a></li>
+                <li><a th:href="@{/raffles/}" class="nav-link px-2 link-dark">Raffles</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-link px-2 dropdown-toggle link-dark" href="#" id="navbarDropdown"
-                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Orders
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">View my order history</a></li>
-                        <li><a class="dropdown-item" href="#">Create a sell order</a></li>
+                        <li><a class="dropdown-item" th:href="@{/orders/}">View my order history</a></li>
+                        <li><a class="dropdown-item" th:href="@{/orders/sell-order}">Create a sell order</a></li>
                     </ul>
                 </li>
             </ul>
 
             <div class="col-md-3 text-end">
-                <button class="btn btn-outline-success" type="submit">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span class="badge cart-bubble bg-success text-white ms-1 rounded-pill">0</span>
-                </button>
-                <button type="button" class="btn btn-
-                -primary me-2">Sign Out</button>
+                <a th:href="@{/checkout}">
+                    <button class="btn btn-outline-success" type="button">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge cart-bubble bg-success text-white ms-1 rounded-pill">[[${shoppingCartSize}]]</span>
+                    </button>
+                </a>
+                <a th:href="@{/logout}">
+                    <button type="button" class="btn btn-
+                    -primary me-2">Sign Out</button>
+                </a>
             </div>
         </header>
 

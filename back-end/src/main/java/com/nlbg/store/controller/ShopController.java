@@ -67,12 +67,6 @@ public class ShopController {
         return "checkout";
     }
 
-    @GetMapping("/yo")
-    @ResponseBody
-    public String yo() {
-        return shoppingCartService.getProducts().toString();
-    }
-
     @PostMapping("/add")
     public String addToCart(@ModelAttribute("name") String name) {
         Item item = itemService.getItemByName(name);

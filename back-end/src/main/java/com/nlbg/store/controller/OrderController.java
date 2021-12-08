@@ -9,6 +9,7 @@ import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.service.CustomerService;
 import com.nlbg.store.service.ItemService;
 import com.nlbg.store.service.OrderService;
+import com.nlbg.store.service.ShoppingCartService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
@@ -35,6 +36,8 @@ public class OrderController {
     ItemService itemService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    ShoppingCartService shoppingCartService;
 
     @GetMapping("/sell-order")
     public String renderCreateSellOrderForm(Principal principal, Model model) {
@@ -45,6 +48,7 @@ public class OrderController {
         model.addAttribute("customer", customer);
         model.addAttribute("items", itemPrice);
         model.addAttribute("sellOrderForm", sellOrderForm);
+        model.addAttribute("shoppingCartSize", shoppingCartService.getCartSize());
         return "create_sell_order";
     }
 
