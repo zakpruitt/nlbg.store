@@ -51,9 +51,9 @@ public class TestConfig {
 //            );
 //            customerRepository.save(customer);
 //
-            Customer customer = customerRepository.findByEmail("billiardgeartv@gmail.com").orElseThrow(() -> new NotFoundException("aa"));
-//            System.out.println(Long.toString(Math.round((new Date()).getTime()/1000)));
-            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
+//            Customer customer = customerRepository.findByEmail("billiardgeartv@gmail.com").orElseThrow(() -> new NotFoundException("aa"));
+////            System.out.println(Long.toString(Math.round((new Date()).getTime()/1000)));
+//            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
 //            predatorAirRush.getPhotos().add(photoService.uploadImage(
 //                    "C:/Users/pruit/Desktop/par1.png",
 //                    UUID.randomUUID().toString(),

@@ -13,11 +13,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT so " +
             "FROM Order so " +
-            "WHERE so.orderType = 'sell'")
+            "WHERE so.orderType = 'Sell'")
     List<Order> findAllSellOrders();
 
     @Query("SELECT so " +
             "FROM Order so " +
-            "WHERE so.orderType = 'purchase'")
+            "WHERE so.orderType = 'Purchase'")
     List<Order> findAllPurchaseOrders();
 }

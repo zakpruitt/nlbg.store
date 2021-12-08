@@ -50,7 +50,6 @@ public class RaffleController {
             ArrayList<Long> positions = kvp.getValue();
             raffleExports.add(raffleService.buildRaffleExport(raffle, positions, customer));
         }
-
         model.addAttribute("raffleExports", raffleExports);
         model.addAttribute("shoppingCartSize", shoppingCartService.getCartSize());
         return "raffle_display";

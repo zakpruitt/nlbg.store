@@ -1,20 +1,28 @@
 package com.nlbg.store.controller;
 
+import com.nlbg.store.domain.Item.Item;
 import com.nlbg.store.domain.Order.Order;
 import com.nlbg.store.domain.Order.PurchaseOrderExport;
 import com.nlbg.store.domain.Photo.Photo;
+import com.nlbg.store.domain.Raffle.Raffle;
+import com.nlbg.store.domain.Raffle.RaffleDetail;
 import com.nlbg.store.domain.User.Customer;
+import com.nlbg.store.repository.RaffleRepository;
 import com.nlbg.store.service.CustomerService;
+import com.nlbg.store.service.ItemService;
 import com.nlbg.store.service.OrderService;
 import com.nlbg.store.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,11 +31,13 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    CustomerService customerService;
-    @Autowired
     OrderService orderService;
     @Autowired
     PhotoService photoService;
+    @Autowired
+    RaffleRepository raffleRepository;
+    @Autowired
+    ItemService itemService;
 
     @GetMapping("/sell-orders")
     public String renderAdminSellOrders(Principal principal, Model model) {
@@ -72,5 +82,24 @@ public class AdminController {
         }
         model.addAttribute("purchaseOrders", poeMap);
         return "admin_purchase_order";
+    }
+
+    @GetMapping("/raffle-mngt")
+    public String renderCreateRaffle(Principal principal) {
+        if (!principal.getName().equals("zakpruitt5@gmail.com")) return "redirect:/";
+        return "admin_raffle";
+    }
+
+    @PostMapping("/create-raffle")
+    @ResponseBody
+    public String createAdminRaffle() {
+        Item predatorAirRush = itemService.getItemByName("Predator Air Rush");
+        Raffle raffle = new Raffle(
+                LocalDate.of(2021, 11, 5),
+                LocalDate.of(2022, 11, 6));
+        RaffleDetail raffleDetail = new RaffleDetail(20, 20, predatorAirRush, raffle);
+        raffle.setRaffleDetail(raffleDetail);
+        raffleRepository.save(raffle);
+        return raffle.getURL();
     }
 }

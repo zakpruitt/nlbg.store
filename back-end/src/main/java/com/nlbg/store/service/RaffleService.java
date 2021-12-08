@@ -74,6 +74,7 @@ public class RaffleService {
         Item item = raffleDetail.getItem();
 
         RaffleExport raffleExport = new RaffleExport();
+        raffleExport.setId(raffle.getId());
         raffleExport.setStatus(!raffle.getEndDate().isBefore(LocalDate.now()));
         raffleExport.setStartDate(raffle.getStartDate());
         raffleExport.setEndDate(raffle.getEndDate());

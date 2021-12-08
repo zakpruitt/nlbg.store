@@ -38,8 +38,6 @@ public abstract class User extends AuditModel implements UserDetails {
     protected String shippingCity;
     protected String shippingState;
     protected String shippingZip;
-    @NotNull(message = "Billing Address is required.")
-    protected String billingAddress;
 
     public Long getId() {
         return id;
@@ -136,14 +134,6 @@ public abstract class User extends AuditModel implements UserDetails {
 
     public void setShippingZip(String shippingZip) {
         this.shippingZip = shippingZip;
-    }
-
-    public String getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(String billingAddress) {
-        this.billingAddress = billingAddress;
     }
 
     @Override

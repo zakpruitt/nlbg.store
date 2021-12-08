@@ -40,11 +40,10 @@ public class RegistrationService {
                         request.getShippingAddress(),
                         request.getShippingCity(),
                         request.getShippingState(),
-                        request.getShippingZip(),
-                        request.getBillingAddress()
+                        request.getShippingZip()
                 )
         );
-        final String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        final String link = "http://localhost:8080/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getEmail(), link));
         System.out.println("email sent");
         return token;
