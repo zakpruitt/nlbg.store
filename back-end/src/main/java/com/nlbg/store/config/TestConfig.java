@@ -51,9 +51,9 @@ public class TestConfig {
 //            );
 //            customerRepository.save(customer);
 //
-//            Customer customer = customerRepository.findByEmail("zakpruitt5@gmail.com").orElseThrow(() -> new NotFoundException("aa"));
+            Customer customer = customerRepository.findByEmail("billiardgeartv@gmail.com").orElseThrow(() -> new NotFoundException("aa"));
 //            System.out.println(Long.toString(Math.round((new Date()).getTime()/1000)));
-//            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
+            Item predatorAirRush = itemRepository.findByItemName("Predator Air Rush");
 //            predatorAirRush.getPhotos().add(photoService.uploadImage(
 //                    "C:/Users/pruit/Desktop/par1.png",
 //                    UUID.randomUUID().toString(),
@@ -73,7 +73,7 @@ public class TestConfig {
 //                    "primary"
 //            ));
 //            itemRepository.save(predatorAirRush);
-//            Raffle raffle = new Raffle(LocalDate.of(2022, 11, 5),
+//            Raffle raffle = new Raffle(LocalDate.of(2021, 11, 5),
 //                    LocalDate.of(2022, 11, 6));
 //            RaffleDetail raffleDetail = new RaffleDetail(20, 20, predatorAirRush, raffle);
 //            raffle.setRaffleDetail(raffleDetail);
@@ -87,7 +87,7 @@ public class TestConfig {
 //            RaffleCustomer raffleCustomer3 = new RaffleCustomer(raffle, customer, 4);
 //            System.out.println(raffle.getRaffleCustomers().size());
 //            raffleCustomerRepository.saveAll(Arrays.asList(raffleCustomer, raffleCustomer1, raffleCustomer2, raffleCustomer3));
-            System.out.println("Test runner complete.");
+//            System.out.println("Test runner complete.");
         };
     }
 }

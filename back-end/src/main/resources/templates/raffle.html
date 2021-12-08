@@ -65,15 +65,13 @@
         </header>
         
         <h2 th:text="'Raffle ' + ${raffle.URL}"></h2>
-        <p>[['Start Date: ' + ${raffle.startDate}]]
+        <p>
+            [['Start Date: ' + ${raffle.startDate}]]
             <br>
             [['End Date: ' + ${raffle.endDate}]]
             <br>
             [['Item: ' + ${raffleDetails.item.itemName}]]
             <br>
-            [['Price Per Slot: ' + ${raffleDetails.pricePerSlot}]]
-            <br>
-            Note: When joining a raffle, it will be added to your cart. To confirm your place in the raffle, make sure to check out!
         </p>
 
         <table class="table raffle-table text-center align-items-center">
@@ -86,14 +84,16 @@
             </thead>
             <tbody class="align-middle">
               <tr th:each="kvp : ${namePositions}">
-                <th scope="row" th:text="${kvp.key}"></th>
-                <td th:text="${kvp.value} ?: ''"></td>
-                <td>
-                    <button type="button"
-                            th:class="${kvp.value == null} ? 'btn btn-success' : 'btn btn-secondary disabled'"
-                            th:text="${kvp.value == null} ? 'Join' : 'Filled'">
-                    </button>
-                </td>
+                <form th:action="'/raffles/' + ${raffle.URL} + '/join'" method="post">
+                    <th scope="row" name="position" th:text="${kvp.key}"></th>
+                    <td th:text="${kvp.value} ?: ''"></td>
+                    <td>
+                        <button type="submit"
+                                th:class="${kvp.value == null} ? 'btn btn-success' : 'btn btn-secondary disabled'"
+                                th:text="${kvp.value == null} ? 'Join' : 'Filled'">
+                        </button>
+                    </td>
+                </form>
               </tr>
             </tbody>
         </table>

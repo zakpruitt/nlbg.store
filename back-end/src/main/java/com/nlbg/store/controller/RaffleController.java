@@ -74,4 +74,18 @@ public class RaffleController {
 
         return "raffle";
     }
+
+    @PostMapping("/{raffleURL}/join")
+    public String joinRaffleSpot(@PathVariable String raffleURL, @ModelAttribute("position") String position, Principal principal) {
+        try {
+            Raffle raffle = raffleService.getRaffleByURL(raffleURL);
+            Customer customer = customerService.getCustomerByEmail(principal.getName());
+
+            RaffleCustomer raffleCustomer = new RaffleCustomer(raffle, customer, Integer.parseInt(position));
+            raffleService.saveRaffleCustomer(raffleCustomer);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/raffles/" + raffleURL;
+    }
 }
