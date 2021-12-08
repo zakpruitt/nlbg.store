@@ -40,6 +40,8 @@ public class OrderService {
     private ShoppingCartService shoppingCartService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private ShippingInformationService shippingInformationService;
 
     public List<Order> getAllByCustomer(Customer customer) {
         return orderRepository.findAllByCustomerId(customer);
@@ -67,7 +69,10 @@ public class OrderService {
                 sellOrderForm.getShippingZip(),
                 order
         );
+        String labelURL = shippingInformationService.getShippingLabelToURL(sellOrderForm);
+        shippingInformation.setShippingLabelURL(labelURL);
         order.setShippingInformation(shippingInformation);
+
         orderRepository.save(order);
         for (MultipartFile file : sellOrderForm.getPhotos()) {
             order.getSellOrderPhotos().add(photoService.uploadImage(
@@ -80,7 +85,7 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public Payment createPayment(PaypalOrderForm paypalOrderForm, String cancelUrl, String successUrl) throws PayPalRESTException {
+    public Payment createPayment(PaypalOrderForm paypalOrderForm, String cancelUrl, String successUrl) throws PayPalRESTException, IOException {
         Customer customer = customerService.getCustomerByEmail(paypalOrderForm.getEmail());
 
         Amount amount = generateAmount(paypalOrderForm);
@@ -124,7 +129,7 @@ public class OrderService {
         return amount;
     }
 
-    private ItemList generateItemList(PaypalOrderForm paypalOrderForm, Customer customer) {
+    private ItemList generateItemList(PaypalOrderForm paypalOrderForm, Customer customer) throws IOException {
         ItemList itemList = new ItemList();
         List<com.paypal.api.payments.Item> items = new ArrayList<>();
         List<Order> orders = new ArrayList<>();
@@ -156,9 +161,12 @@ public class OrderService {
             }
         }
         String groupID = orders.get(0).generateOrderGroupID();
-        orders.forEach(order -> order.setOrderGroupId(groupID));
+        String labelURL = shippingInformationService.getShippingLabelFromURL(paypalOrderForm);
+        for (Order order : orders) {
+            order.setOrderGroupId(groupID);
+            order.getShippingInformation().setShippingLabelURL(labelURL);
+        }
         orderRepository.saveAll(orders);
-
         itemList.setItems(items);
         return itemList;
     }

@@ -84,7 +84,7 @@ public class OrderController {
                     return "redirect:" + link.getHref();
                 }
             }
-        } catch (PayPalRESTException e) {
+        } catch (PayPalRESTException | IOException e) {
             e.printStackTrace();
         }
         return "redirect:/";
