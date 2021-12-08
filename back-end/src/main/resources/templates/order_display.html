@@ -85,7 +85,26 @@
                                 <tr th:each="order: ${orders}" class="cell-1 text-center">
                                     <td>[[${order.id}]]</td>
                                     <td>[[${order.orderType}]]</td>
-                                    <td>Fullfilled</td>
+                                    <td th:switch="${order.orderStatus}">
+                                        <div th:case="'0'">
+                                            Reviewing
+                                        </div>
+                                        <div th:case="'1'">
+                                            Accepted
+                                        </div>
+                                        <div th:case="'2'">
+                                            Denied
+                                        </div>
+                                        <div th:case="'3'">
+                                            Completed
+                                        </div>
+                                        <div th:case="'4'">
+                                            Shipping
+                                        </div>
+                                        <div th:case="'5'">
+                                            Shipped
+                                        </div>
+                                    </td>
                                     <td>$[[${order.total}]]</td>
                                     <td>[[${order.shippingInformation.shippingLabelURL}]]</td>
                                     <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
