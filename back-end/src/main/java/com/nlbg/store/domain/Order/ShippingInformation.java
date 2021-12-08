@@ -42,6 +42,10 @@ public class ShippingInformation extends AuditModel {
         this.parentOrder = parentOrder;
     }
 
+    public ShippingInformation() {
+
+    }
+
     public Long getId() {
         return id;
     }

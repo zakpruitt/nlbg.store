@@ -120,7 +120,7 @@ public class OrderService {
 
         for (Map.Entry<Item, Integer> kvp : shoppingCartService.getProducts().entrySet()) {
             Item currentItem = kvp.getKey();
-            com.paypal.api.payments.Item item = generatePaypalItem(currentItem);
+            com.paypal.api.payments.Item item = generatePaypalItem(currentItem, kvp.getValue());
             items.add(item);
 
             // purchase order (customer buying)
@@ -144,22 +144,20 @@ public class OrderService {
                 orders.add(order);
             }
         }
-        orderRepository.save(orders.get(0));
-        Long id = orders.get(0).getId();
-        orders.forEach(order -> order.setId(id));
+        String groupID = orders.get(0).generateOrderGroupID();
+        orders.forEach(order -> order.setOrderGroupId(groupID));
         orderRepository.saveAll(orders);
 
         itemList.setItems(items);
         return itemList;
     }
 
-    private com.paypal.api.payments.Item generatePaypalItem(Item item) {
-        Item currentItem = itemService.getItemByName(item.getItemName());
+    private com.paypal.api.payments.Item generatePaypalItem(Item item, Integer quantity) {
         com.paypal.api.payments.Item paypalItem = new com.paypal.api.payments.Item();
         paypalItem.setCurrency("USD");
-        paypalItem.setName(currentItem.getItemName());
-        paypalItem.setPrice(currentItem.getItemDesiredValue().toString());
-        paypalItem.setQuantity(currentItem.toString());
+        paypalItem.setName(item.getItemName());
+        paypalItem.setPrice(item.getItemDesiredValue().toString());
+        paypalItem.setQuantity(quantity.toString());
         return paypalItem;
     }
 }

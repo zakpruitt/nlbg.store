@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "orders")
@@ -23,6 +24,7 @@ public class Order extends AuditModel {
     private int orderStatus;
     @Lob
     private String comments;
+    private String orderGroupId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
@@ -73,6 +75,14 @@ public class Order extends AuditModel {
         this.comments = comments;
     }
 
+    public String getOrderGroupId() {
+        return orderGroupId;
+    }
+
+    public void setOrderGroupId(String orderGroupId) {
+        this.orderGroupId = orderGroupId;
+    }
+
     public Item getItem() {
         return item;
     }
@@ -103,5 +113,10 @@ public class Order extends AuditModel {
 
     public void setSellOrderPhotos(Set<Photo> sellOrderPhotos) {
         this.sellOrderPhotos = sellOrderPhotos;
+    }
+
+    public String generateOrderGroupID() {
+        this.orderGroupId = UUID.randomUUID().toString();
+        return this.orderGroupId;
     }
 }
