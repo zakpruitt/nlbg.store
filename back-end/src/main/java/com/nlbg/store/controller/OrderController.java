@@ -63,7 +63,7 @@ public class OrderController {
     public String facilitatePayment(@ModelAttribute("paypalOrderForm")PaypalOrderForm paypalOrderForm) {
         try {
             Payment payment = orderService.createPayment(
-                    paypalOrderForm.getPrice(),
+                    paypalOrderForm,
                     "http://localhost:8080/orders/cancel",
                     "http://localhost:8080/orders/success"
                     );

@@ -2,6 +2,7 @@ package com.nlbg.store.service;
 
 import com.nlbg.store.domain.Item.Item;
 import com.nlbg.store.domain.Order.Order;
+import com.nlbg.store.domain.Order.PaypalOrderForm;
 import com.nlbg.store.domain.Order.SellOrderForm;
 import com.nlbg.store.domain.Order.ShippingInformation;
 import com.nlbg.store.domain.User.Customer;
@@ -37,56 +38,44 @@ public class OrderService {
     private PhotoService photoService;
     @Autowired
     private ShoppingCartService shoppingCartService;
+    @Autowired
+    private CustomerService customerService;
 
     public void createSellOrder(SellOrderForm sellOrderForm, Customer customer) throws IOException {
-        Item item = itemService.getItemByName(sellOrderForm.getItemName());
-        if (item == null) {
-            // TODO: Handle new category.
-            //item = new Item(sellOrderForm.getItemName(), sellOrderForm.getItemPrice(), );
-        }
-
-        Order order = new Order(item, customer, 0);
-        // TODO: Handle local pickup.
-        ShippingInformation shippingInformation = new ShippingInformation(
-                true,
-                "3608 Quarry Ridge Dr., Evansville, IN 47720",
-                sellOrderForm.getShippingAddress(),
-                order
-        );
-        order.setShippingInformation(shippingInformation);
-        orderRepository.save(order);
-        for (MultipartFile file : sellOrderForm.getPhotos()) {
-            order.getSellOrderPhotos().add(photoService.uploadImage(
-                    file,
-                    UUID.randomUUID().toString(),
-                    order,
-                    "secondary"
-            ));
-        }
-        orderRepository.save(order);
+//        Item item = itemService.getItemByName(sellOrderForm.getItemName());
+//        if (item == null) {
+//            // TODO: Handle new category.
+//            //item = new Item(sellOrderForm.getItemName(), sellOrderForm.getItemPrice(), );
+//        }
+//
+//        Order order = new Order(item, customer, 0);
+//        // TODO: Handle local pickup.
+//        ShippingInformation shippingInformation = new ShippingInformation(
+//                true,
+//                "3608 Quarry Ridge Dr., Evansville, IN 47720",
+//                sellOrderForm.getShippingAddress(),
+//                order
+//        );
+//        order.setShippingInformation(shippingInformation);
+//        orderRepository.save(order);
+//        for (MultipartFile file : sellOrderForm.getPhotos()) {
+//            order.getSellOrderPhotos().add(photoService.uploadImage(
+//                    file,
+//                    UUID.randomUUID().toString(),
+//                    order,
+//                    "secondary"
+//            ));
+//        }
+//        orderRepository.save(order);
     }
 
-    public Payment createPayment(Double total, String cancelUrl, String successUrl) throws PayPalRESTException {
-        Amount amount = new Amount();
-        amount.setCurrency("USD");
-        total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        amount.setTotal(String.format("%.2f", total));
+    public Payment createPayment(PaypalOrderForm paypalOrderForm, String cancelUrl, String successUrl) throws PayPalRESTException {
+        Customer customer = customerService.getCustomerByEmail(paypalOrderForm.getEmail());
 
+        Amount amount = generateAmount(paypalOrderForm);
         Transaction transaction = new Transaction();
 
-        ItemList itemList = new ItemList();
-        List<com.paypal.api.payments.Item> items = new ArrayList<>();
-        for (Map.Entry<Item, Integer> kvp : shoppingCartService.getProducts().entrySet()) {
-            com.paypal.api.payments.Item item = new com.paypal.api.payments.Item();
-            item.setCurrency("USD");
-            item.setName(kvp.getKey().getItemName());
-            item.setPrice(kvp.getKey().getItemDesiredValue().toString());
-            item.setQuantity(kvp.getValue().toString());
-            items.add(item);
-        }
-        itemList.setItems(items);
-
-        transaction.setItemList(itemList);
+        transaction.setItemList(generateItemList(paypalOrderForm, customer));
         transaction.setAmount(amount);
 
         List<Transaction> transactions = new ArrayList<>();
@@ -114,5 +103,63 @@ public class OrderService {
         PaymentExecution paymentExecute = new PaymentExecution();
         paymentExecute.setPayerId(payerId);
         return payment.execute(apiContext, paymentExecute);
+    }
+
+    private Amount generateAmount(PaypalOrderForm paypalOrderForm) {
+        Amount amount = new Amount();
+        amount.setCurrency("USD");
+        double total = new BigDecimal(paypalOrderForm.getPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        amount.setTotal(String.format("%.2f", total));
+        return amount;
+    }
+
+    private ItemList generateItemList(PaypalOrderForm paypalOrderForm, Customer customer) {
+        ItemList itemList = new ItemList();
+        List<com.paypal.api.payments.Item> items = new ArrayList<>();
+        List<Order> orders = new ArrayList<>();
+
+        for (Map.Entry<Item, Integer> kvp : shoppingCartService.getProducts().entrySet()) {
+            Item currentItem = kvp.getKey();
+            com.paypal.api.payments.Item item = generatePaypalItem(currentItem);
+            items.add(item);
+
+            // purchase order (customer buying)
+            for (int i = 0; i < kvp.getValue(); i++) {
+                Order order = new Order(currentItem, customer, 4);
+                ShippingInformation shippingInformation = new ShippingInformation(
+                        "3608 Quarry Ridge Dr.",
+                        "United States",
+                        "Evansville",
+                        "IN",
+                        "47720",
+                        paypalOrderForm.getShippingAddress(),
+                        paypalOrderForm.getShippingCountry(),
+                        paypalOrderForm.getShippingCity(),
+                        paypalOrderForm.getShippingState(),
+                        paypalOrderForm.getShippingZip(),
+                        order
+                );
+                currentItem.setQuantitySold(currentItem.getQuantitySold() + 1);
+                order.setShippingInformation(shippingInformation);
+                orders.add(order);
+            }
+        }
+        orderRepository.save(orders.get(0));
+        Long id = orders.get(0).getId();
+        orders.forEach(order -> order.setId(id));
+        orderRepository.saveAll(orders);
+
+        itemList.setItems(items);
+        return itemList;
+    }
+
+    private com.paypal.api.payments.Item generatePaypalItem(Item item) {
+        Item currentItem = itemService.getItemByName(item.getItemName());
+        com.paypal.api.payments.Item paypalItem = new com.paypal.api.payments.Item();
+        paypalItem.setCurrency("USD");
+        paypalItem.setName(currentItem.getItemName());
+        paypalItem.setPrice(currentItem.getItemDesiredValue().toString());
+        paypalItem.setQuantity(currentItem.toString());
+        return paypalItem;
     }
 }
