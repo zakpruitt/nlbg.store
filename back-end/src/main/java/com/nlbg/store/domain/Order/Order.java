@@ -42,6 +42,13 @@ public class Order extends AuditModel {
     @JoinTable
     Set<Photo> sellOrderPhotos = new HashSet<>();
 
+    public Order(Item item, Customer customer, int orderStatus, String comments) {
+        this.item = item;
+        this.customer = customer;
+        this.orderStatus = orderStatus;
+        this.comments = comments;
+    }
+
     public Order(Item item, Customer customer, int orderStatus) {
         this.item = item;
         this.customer = customer;

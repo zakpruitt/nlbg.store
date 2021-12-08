@@ -13,6 +13,7 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,6 +21,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class OrderService {
@@ -40,31 +42,38 @@ public class OrderService {
     private CustomerService customerService;
 
     public void createSellOrder(SellOrderForm sellOrderForm, Customer customer) throws IOException {
-//        Item item = itemService.getItemByName(sellOrderForm.getItemName());
-//        if (item == null) {
-//            // TODO: Handle new category.
-//            //item = new Item(sellOrderForm.getItemName(), sellOrderForm.getItemPrice(), );
-//        }
-//
-//        Order order = new Order(item, customer, 0);
-//        // TODO: Handle local pickup.
-//        ShippingInformation shippingInformation = new ShippingInformation(
-//                true,
-//                "3608 Quarry Ridge Dr., Evansville, IN 47720",
-//                sellOrderForm.getShippingAddress(),
-//                order
-//        );
-//        order.setShippingInformation(shippingInformation);
-//        orderRepository.save(order);
-//        for (MultipartFile file : sellOrderForm.getPhotos()) {
-//            order.getSellOrderPhotos().add(photoService.uploadImage(
-//                    file,
-//                    UUID.randomUUID().toString(),
-//                    order,
-//                    "secondary"
-//            ));
-//        }
-//        orderRepository.save(order);
+        Item item = itemService.getItemByName(sellOrderForm.getItemName());
+        if (item == null) {
+            // TODO: Handle new category.
+            //item = new Item(sellOrderForm.getItemName(), sellOrderForm.getItemPrice(), );
+        }
+
+        Order order = new Order(item, customer, 0, sellOrderForm.getComments());
+        // TODO: Handle local pickup.
+        ShippingInformation shippingInformation = new ShippingInformation(
+                "3608 Quarry Ridge Dr.",
+                "United States",
+                "Evansville",
+                "IN",
+                "47720",
+                sellOrderForm.getShippingAddress(),
+                sellOrderForm.getShippingCountry(),
+                sellOrderForm.getShippingCity(),
+                sellOrderForm.getShippingState(),
+                sellOrderForm.getShippingZip(),
+                order
+        );
+        order.setShippingInformation(shippingInformation);
+        orderRepository.save(order);
+        for (MultipartFile file : sellOrderForm.getPhotos()) {
+            order.getSellOrderPhotos().add(photoService.uploadImage(
+                    file,
+                    UUID.randomUUID().toString(),
+                    order,
+                    "secondary"
+            ));
+        }
+        orderRepository.save(order);
     }
 
     public Payment createPayment(PaypalOrderForm paypalOrderForm, String cancelUrl, String successUrl) throws PayPalRESTException {
@@ -125,16 +134,16 @@ public class OrderService {
             for (int i = 0; i < kvp.getValue(); i++) {
                 Order order = new Order(currentItem, customer, 4);
                 ShippingInformation shippingInformation = new ShippingInformation(
-                        "3608 Quarry Ridge Dr.",
-                        "United States",
-                        "Evansville",
-                        "IN",
-                        "47720",
                         paypalOrderForm.getShippingAddress(),
                         paypalOrderForm.getShippingCountry(),
                         paypalOrderForm.getShippingCity(),
                         paypalOrderForm.getShippingState(),
                         paypalOrderForm.getShippingZip(),
+                        "3608 Quarry Ridge Dr.",
+                        "United States",
+                        "Evansville",
+                        "IN",
+                        "47720",
                         order
                 );
                 currentItem.setQuantitySold(currentItem.getQuantitySold() + 1);
