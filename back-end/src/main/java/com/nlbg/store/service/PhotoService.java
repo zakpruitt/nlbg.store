@@ -36,8 +36,8 @@ public class PhotoService {
             "api_secret", "eujBGLpb3B30KuJDbUcVOWAp3oA"
             ));
 
-    public Photo uploadImage(MultipartFile file, String publicId, Item item, String photoType) throws IOException {
-        Map result = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
+    public Photo uploadImage(String url, String publicId, Item item, String photoType) throws IOException {
+        Map result = cloudinary.uploader().upload(new File(url), ObjectUtils.asMap(
                 "public_id", publicId,
                 "tags", item.getId().toString()
         ));
