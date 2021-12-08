@@ -23,6 +23,7 @@ public class ShippingInformation extends AuditModel {
     private String shippingFromCity;
     private String shippingFromState;
     private String shippingFromZip;
+    private String shippingLabelURL;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_ID", referencedColumnName = "id")
@@ -140,5 +141,13 @@ public class ShippingInformation extends AuditModel {
 
     public void setParentOrder(Order parentOrder) {
         this.parentOrder = parentOrder;
+    }
+
+    public String getShippingLabelURL() {
+        return shippingLabelURL;
+    }
+
+    public void setShippingLabelURL(String shippingLabelURL) {
+        this.shippingLabelURL = shippingLabelURL;
     }
 }

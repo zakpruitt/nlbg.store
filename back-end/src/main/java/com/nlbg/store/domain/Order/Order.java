@@ -25,6 +25,8 @@ public class Order extends AuditModel {
     @Lob
     private String comments;
     private String orderGroupId;
+    private String orderType;
+    private Double total;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
@@ -42,17 +44,21 @@ public class Order extends AuditModel {
     @JoinTable
     Set<Photo> sellOrderPhotos = new HashSet<>();
 
-    public Order(Item item, Customer customer, int orderStatus, String comments) {
+    public Order(Item item, Customer customer, int orderStatus, String orderType, String comments, Double total) {
         this.item = item;
         this.customer = customer;
         this.orderStatus = orderStatus;
         this.comments = comments;
+        this.orderType = orderType;
+        this.total = total;
     }
 
-    public Order(Item item, Customer customer, int orderStatus) {
+    public Order(Item item, Customer customer, int orderStatus, String orderType, Double total) {
         this.item = item;
         this.customer = customer;
         this.orderStatus = orderStatus;
+        this.orderType = orderType;
+        this.total = total;
     }
 
     public Order() {
@@ -88,6 +94,22 @@ public class Order extends AuditModel {
 
     public void setOrderGroupId(String orderGroupId) {
         this.orderGroupId = orderGroupId;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public Item getItem() {

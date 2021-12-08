@@ -39,6 +39,14 @@ public class OrderController {
     @Autowired
     ShoppingCartService shoppingCartService;
 
+    @GetMapping("/")
+    public String renderOrders(Principal principal, Model model) {
+        Customer customer = customerService.getCustomerByEmail(principal.getName());
+        List<Order> orders = orderService.getAllByCustomer(customer);
+        model.addAttribute("orders", orders);
+        return "order_display";
+    }
+
     @GetMapping("/sell-order")
     public String renderCreateSellOrderForm(Principal principal, Model model) {
         Customer customer = customerService.getCustomerByEmail(principal.getName());
