@@ -13,24 +13,38 @@ public class ShippingInformation extends AuditModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private boolean localPickup;
-    private int shippingStatus;
-    private String shippingTo;
-    private String shippingFrom;
+    private String shippingToAddress;
+    private String shippingToCountry;
+    private String shippingToCity;
+    private String shippingToState;
+    private String shippingToZip;
+    private String shippingFromAddress;
+    private String shippingFromCountry;
+    private String shippingFromCity;
+    private String shippingFromState;
+    private String shippingFromZip;
+    private String shippingLabelURL;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_ID", referencedColumnName = "id")
     private Order parentOrder;
 
-    public ShippingInformation(boolean localPickup, String shippingTo, String shippingFrom, Order order) {
-        this.localPickup = localPickup;
-        this.shippingFrom = shippingFrom;
-        this.shippingTo = shippingTo;
-        this.parentOrder = order;
-        this.shippingStatus = 0;
+    public ShippingInformation(String shippingToAddress, String shippingToCountry, String shippingToCity, String shippingToState, String shippingToZip, String shippingFromAddress, String shippingFromCountry, String shippingFromCity, String shippingFromState, String shippingFromZip, Order parentOrder) {
+        this.shippingToAddress = shippingToAddress;
+        this.shippingToCountry = shippingToCountry;
+        this.shippingToCity = shippingToCity;
+        this.shippingToState = shippingToState;
+        this.shippingToZip = shippingToZip;
+        this.shippingFromAddress = shippingFromAddress;
+        this.shippingFromCountry = shippingFromCountry;
+        this.shippingFromCity = shippingFromCity;
+        this.shippingFromState = shippingFromState;
+        this.shippingFromZip = shippingFromZip;
+        this.parentOrder = parentOrder;
     }
 
     public ShippingInformation() {
+
     }
 
     public Long getId() {
@@ -41,36 +55,84 @@ public class ShippingInformation extends AuditModel {
         this.id = id;
     }
 
-    public boolean isLocalPickup() {
-        return localPickup;
+    public String getShippingToAddress() {
+        return shippingToAddress;
     }
 
-    public void setLocalPickup(boolean localPickup) {
-        this.localPickup = localPickup;
+    public void setShippingToAddress(String shippingToAddress) {
+        this.shippingToAddress = shippingToAddress;
     }
 
-    public int getShippingStatus() {
-        return shippingStatus;
+    public String getShippingToCountry() {
+        return shippingToCountry;
     }
 
-    public void setShippingStatus(int shippingStatus) {
-        this.shippingStatus = shippingStatus;
+    public void setShippingToCountry(String shippingToCountry) {
+        this.shippingToCountry = shippingToCountry;
     }
 
-    public String getShippingTo() {
-        return shippingTo;
+    public String getShippingToCity() {
+        return shippingToCity;
     }
 
-    public void setShippingTo(String shippingTo) {
-        this.shippingTo = shippingTo;
+    public void setShippingToCity(String shippingToCity) {
+        this.shippingToCity = shippingToCity;
     }
 
-    public String getShippingFrom() {
-        return shippingFrom;
+    public String getShippingToState() {
+        return shippingToState;
     }
 
-    public void setShippingFrom(String shippingFrom) {
-        this.shippingFrom = shippingFrom;
+    public void setShippingToState(String shippingToState) {
+        this.shippingToState = shippingToState;
+    }
+
+    public String getShippingToZip() {
+        return shippingToZip;
+    }
+
+    public void setShippingToZip(String shippingToZip) {
+        this.shippingToZip = shippingToZip;
+    }
+
+    public String getShippingFromAddress() {
+        return shippingFromAddress;
+    }
+
+    public void setShippingFromAddress(String shippingFromAddress) {
+        this.shippingFromAddress = shippingFromAddress;
+    }
+
+    public String getShippingFromCountry() {
+        return shippingFromCountry;
+    }
+
+    public void setShippingFromCountry(String shippingFromCountry) {
+        this.shippingFromCountry = shippingFromCountry;
+    }
+
+    public String getShippingFromCity() {
+        return shippingFromCity;
+    }
+
+    public void setShippingFromCity(String shippingFromCity) {
+        this.shippingFromCity = shippingFromCity;
+    }
+
+    public String getShippingFromState() {
+        return shippingFromState;
+    }
+
+    public void setShippingFromState(String shippingFromState) {
+        this.shippingFromState = shippingFromState;
+    }
+
+    public String getShippingFromZip() {
+        return shippingFromZip;
+    }
+
+    public void setShippingFromZip(String shippingFromZip) {
+        this.shippingFromZip = shippingFromZip;
     }
 
     public Order getParentOrder() {
@@ -79,5 +141,13 @@ public class ShippingInformation extends AuditModel {
 
     public void setParentOrder(Order parentOrder) {
         this.parentOrder = parentOrder;
+    }
+
+    public String getShippingLabelURL() {
+        return shippingLabelURL;
+    }
+
+    public void setShippingLabelURL(String shippingLabelURL) {
+        this.shippingLabelURL = shippingLabelURL;
     }
 }

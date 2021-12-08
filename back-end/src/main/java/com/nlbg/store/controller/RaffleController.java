@@ -8,6 +8,7 @@ import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.service.CustomerService;
 import com.nlbg.store.service.RaffleService;
+import com.nlbg.store.service.ShoppingCartService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class RaffleController {
     RaffleService raffleService;
     @Autowired
     CustomerService customerService;
+    @Autowired
+    ShoppingCartService shoppingCartService;
 
     @GetMapping("/a")
     public String displayAllRaffleURLs(Principal principal) {
@@ -47,8 +50,8 @@ public class RaffleController {
             ArrayList<Long> positions = kvp.getValue();
             raffleExports.add(raffleService.buildRaffleExport(raffle, positions, customer));
         }
-
         model.addAttribute("raffleExports", raffleExports);
+        model.addAttribute("shoppingCartSize", shoppingCartService.getCartSize());
         return "raffle_display";
     }
 
@@ -61,6 +64,7 @@ public class RaffleController {
 
             model.addAttribute("raffle", raffle);
             model.addAttribute("raffleDetails", raffleDetails);
+            model.addAttribute("shoppingCartSize", shoppingCartService.getCartSize());
             model.addAttribute("namePositions", namePosition);
         } catch (NotFoundException e) {
             e.printStackTrace();
@@ -68,5 +72,19 @@ public class RaffleController {
         }
 
         return "raffle";
+    }
+
+    @PostMapping("/{raffleURL}/join")
+    public String joinRaffleSpot(@PathVariable String raffleURL, @ModelAttribute("position") String position, Principal principal) {
+        try {
+            Raffle raffle = raffleService.getRaffleByURL(raffleURL);
+            Customer customer = customerService.getCustomerByEmail(principal.getName());
+
+            RaffleCustomer raffleCustomer = new RaffleCustomer(raffle, customer, Integer.parseInt(position));
+            raffleService.saveRaffleCustomer(raffleCustomer);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/raffles/" + raffleURL;
     }
 }

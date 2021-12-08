@@ -26,7 +26,7 @@ public class Customer extends User {
         @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
         private Set<RaffleCustomer> raffleCustomers;
 
-        public Customer(String firstName, String lastName, String password, String email, String phoneNumber, String shippingAddress, String shippingCity, String shippingState, String shippingZip, String billingAddress) {
+        public Customer(String firstName, String lastName, String password, String email, String phoneNumber, String shippingAddress, String shippingCity, String shippingState, String shippingZip) {
                 this.firstName = firstName;
                 this.lastName = lastName;
                 this.password = password;
@@ -36,7 +36,6 @@ public class Customer extends User {
                 this.shippingCity = shippingCity;
                 this.shippingState = shippingState;
                 this.shippingZip = shippingZip;
-                this.billingAddress = billingAddress;
                 enabled = false;
                 locked = false;
         }

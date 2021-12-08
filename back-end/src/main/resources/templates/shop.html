@@ -46,7 +46,7 @@
                 <a th:href="@{/login}">
                     <button type="button" class="btn btn-outline-primary me-2">Login</button>
                 </a>
-                <a>
+                <a th:href="@{/registration/r}">
                     <button type="button" class="btn btn-primary">Sign-up</button>
                 </a>
             </div>
@@ -61,16 +61,27 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Shop</a></li>
-                <li><a href="raffle_display.html" class="nav-link px-2 link-dark">Raffles</a></li>
+                <li><a th:href="@{/}" class="nav-link px-2 link-secondary">Shop</a></li>
+                <li><a th:href="@{/raffles/}" class="nav-link px-2 link-dark">Raffles</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-link px-2 dropdown-toggle link-dark" href="#" id="navbarDropdown"
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Orders
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">View my order history</a></li>
-                        <li><a class="dropdown-item" href="#">Create a sell order</a></li>
+                        <li><a class="dropdown-item" th:href="@{/orders/}">View my order history</a></li>
+                        <li><a class="dropdown-item" th:href="@{/orders/sell-order}">Create a sell order</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-link px-2 dropdown-toggle link-dark" href="#" id="adminDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                        <li><a class="dropdown-item" th:href="@{/admin/sell-orders}">Manage sell orders</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/purchase-orders}">Manage purchase orders</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/raffle-mngt}">Manage raffles</a></li>
                     </ul>
                 </li>
             </ul>
@@ -148,20 +159,20 @@
                 <div class="col-4">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                        <img class="card-img-top" th:src="@{/images/par1.png}"
                              alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <h5 class="fw-bolder">Predator Air Rush</h5>
                                 <!-- Product price-->
                                 $40.00 - $80.00
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/6">View
                                 options</a></div>
                         </div>
                     </div>
@@ -169,20 +180,20 @@
                 <div class="col-4">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                        <img class="card-img-top" th:src="@{/images/AirIce.jpg}"
                              alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <h5 class="fw-bolder">Predator Air Ice</h5>
                                 <!-- Product price-->
                                 $40.00 - $80.00
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/213">View
                                 options</a></div>
                         </div>
                     </div>
@@ -190,20 +201,20 @@
                 <div class="col-4">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                        <img class="card-img-top" th:src="@{/images/cuetecPropel.jpg}"
                              alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <h5 class="fw-bolder">Cuetec Propel - Ghost</h5>
                                 <!-- Product price-->
                                 $40.00 - $80.00
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/221">View
                                 options</a></div>
                         </div>
                     </div>
@@ -213,7 +224,7 @@
                 <div class="col-4">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                        <img class="card-img-top" th:src="@{/images/cuetecPropel.jpg}"
                              alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
@@ -226,7 +237,7 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/222">View
                                 options</a></div>
                         </div>
                     </div>

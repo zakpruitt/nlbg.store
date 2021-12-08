@@ -6,7 +6,6 @@ import com.nlbg.store.domain.Raffle.RaffleCustomer;
 import com.nlbg.store.domain.Raffle.RaffleDetail;
 import com.nlbg.store.domain.Raffle.RaffleExport;
 import com.nlbg.store.domain.User.Customer;
-import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.repository.RaffleCustomerRepository;
 import com.nlbg.store.repository.RaffleDetailRepository;
 import com.nlbg.store.repository.RaffleRepository;
@@ -66,11 +65,16 @@ public class RaffleService {
         return rafflePositionsDictionary;
     }
 
+    public RaffleCustomer saveRaffleCustomer(RaffleCustomer raffleCustomer) {
+        return raffleCustomerRepository.save(raffleCustomer);
+    }
+
     public RaffleExport buildRaffleExport(Raffle raffle, ArrayList<Long> positions, Customer customer) {
         RaffleDetail raffleDetail = raffle.getRaffleDetail();
         Item item = raffleDetail.getItem();
 
         RaffleExport raffleExport = new RaffleExport();
+        raffleExport.setId(raffle.getId());
         raffleExport.setStatus(!raffle.getEndDate().isBefore(LocalDate.now()));
         raffleExport.setStartDate(raffle.getStartDate());
         raffleExport.setEndDate(raffle.getEndDate());

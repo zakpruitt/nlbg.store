@@ -36,43 +36,47 @@
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="shop.html" class="nav-link px-2 link-dark">Shop</a></li>
-            <li><a href="#" class="nav-link px-2 link-secondary">Raffles</a></li>
+            <li><a th:href="@{/}" class="nav-link px-2 link-secondary">Shop</a></li>
+            <li><a th:href="@{/raffles/}" class="nav-link px-2 link-dark">Raffles</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link nav-link px-2 dropdown-toggle link-dark" href="#" id="navbarDropdown"
                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Orders
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">View my order history</a></li>
-                    <li><a class="dropdown-item" href="#">Create a sell order</a></li>
+                    <li><a class="dropdown-item" th:href="@{/orders/}">View my order history</a></li>
+                    <li><a class="dropdown-item" th:href="@{/orders/sell-order}">Create a sell order</a></li>
                 </ul>
             </li>
         </ul>
 
         <div class="col-md-3 text-end">
-            <button class="btn btn-outline-success" type="submit">
-                <i class="bi-cart-fill me-1"></i>
-                Cart
-                <span class="badge cart-bubble bg-success text-white ms-1 rounded-pill">0</span>
-            </button>
-            <button type="button" class="btn btn-
-                -primary me-2">Sign Out</button>
+            <a th:href="@{/checkout}">
+                <button class="btn btn-outline-success" type="button">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge cart-bubble bg-success text-white ms-1 rounded-pill">[[${shoppingCartSize}]]</span>
+                </button>
+            </a>
+            <a th:href="@{/logout}">
+                <button type="button" class="btn btn-
+                    -primary me-2">Sign Out</button>
+            </a>
         </div>
     </header>
 
-    <form action="#" th:action="@{/orders/sell-order}" method="post" th:object="${sellOrderForm}" enctype="multipart/form-data" class="order-block rounded-lg">
+    <form action="/orders/sell-order" method="post" enctype="multipart/form-data" class="order-block rounded-lg">
         <!-- First Name/Last Name -->
         <div class="row mb-3">
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="text" th:field="*{firstName}" th:value="${customer.firstName}" class="form-control" id="fNameInput" placeholder="Vincent">
+                    <input type="text" name="firstName" th:value="${customer.firstName}" class="form-control" id="fNameInput" placeholder="Vincent">
                     <label for="fNameInput">First Name</label>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="text" th:field="*{lastName}" th:value="${customer.lastName}" class="form-control" id="lNameInput" placeholder="Parsons">
+                    <input type="text" name="lastName" th:value="${customer.lastName}" class="form-control" id="lNameInput" placeholder="Parsons">
                     <label for="lNameInput">Last Name</label>
                 </div>
             </div>
@@ -82,13 +86,13 @@
         <div class="row mb-3">
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="email" th:field="*{email}" th:value="${customer.email}" class="form-control" id="emailInput" placeholder="name@example.com">
+                    <input type="email" name="email" th:value="${customer.email}" class="form-control" id="emailInput" placeholder="name@example.com">
                     <label for="emailInput">Email address</label>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="text" th:field="*{phoneNumber}" th:value="${customer.phoneNumber}" class="form-control" id="phoneNumber" placeholder="Parsons">
+                    <input type="text" name="phoneNumber" th:value="${customer.phoneNumber}" class="form-control" id="phoneNumber" placeholder="Parsons">
                     <label for="phoneNumber">Phone number</label>
                 </div>
             </div>
@@ -96,15 +100,43 @@
 
         <!-- Shipping Address -->
         <div class="form-floating mb-3">
-            <input type="text" th:field="*{shippingAddress}" th:value="${customer.shippingAddress}" class="form-control" id="shippingInput" placeholder="name@example.com">
-            <label for="emailInput">Your shipping address</label>
+            <input type="text" name="shippingAddress" th:value="${customer.shippingAddress}" class="form-control" id="shippingAddressInput" placeholder="name@example.com">
+            <label for="shippingAddressInput">Your street address to ship to</label>
+        </div>
+
+        <!-- Shipping City -->
+        <div class="form-floating mb-3">
+            <input type="text" name="shippingCity" th:value="${customer.shippingCity}" class="form-control" id="shippingCityInput" placeholder="name@example.com">
+            <label for="shippingCityInput">Your shipping address' city</label>
+        </div>
+
+        <!-- Country, State, Zip -->
+        <div class="row mb-3">
+            <div class="col-4">
+                <label for="country" class="form-label">Country</label>
+                <select class="form-select" id="country" name="shippingCountry" required>
+                    <option>United States</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="state" class="form-label">State</label>
+                <select class="form-select" id="state" name="shippingState" required>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="zip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="zip" name="shippingZip" th:value="${customer.shippingZip}" required>
+                <div class="invalid-feedback">
+                    Zip code required.
+                </div>
+            </div>
         </div>
 
         <!-- Item/Generated Price -->
         <div class="row mb-3">
             <div class="col-6">
                 <div class="form-floating">
-                    <input class="form-control" id="itemInput" list="itemOptions" th:field="*{itemName}">
+                    <input class="form-control" id="itemInput" list="itemOptions" name="itemName">
                     <label for="itemInput">Type or search for your item...</label>
                     <datalist id="itemOptions">
                         <option th:each="kvp: ${items}" th:value="${kvp.key}" th:price="${kvp.value}">
@@ -114,7 +146,7 @@
             <div class="col-6">
                 <div class="input-group h-100">
                     <span class="input-group-text">$</span>
-                    <input type="number" id="priceInput" th:field="*{itemPrice}" readonly class="form-control">
+                    <input type="number" id="priceInput" name="itemPrice" readonly class="form-control">
                     <span class="input-group-text">.00</span>
                 </div>
             </div>
@@ -123,13 +155,13 @@
         <!-- File Uploading -->
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label float-start">Select photos of the item</label>
-            <input class="form-control" type="file" th:field="*{photos}" id="formFileMultiple" multiple>
+            <input class="form-control" type="file" name="photos" id="formFileMultiple" multiple>
         </div>
 
         <!-- Comments -->
         <div class="form-floating mb-3">
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                          style="height: 100px" th:field="*{comments}"></textarea>
+                          style="height: 100px" name="comments"></textarea>
             <label for="floatingTextarea2">Comments about the item</label>
         </div>
 

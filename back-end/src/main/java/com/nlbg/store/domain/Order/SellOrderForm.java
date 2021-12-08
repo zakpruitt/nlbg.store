@@ -10,6 +10,10 @@ public class SellOrderForm {
     private String email;
     private String phoneNumber;
     private String shippingAddress;
+    private String shippingCountry;
+    private String shippingCity;
+    private String shippingState;
+    private String shippingZip;
     private String itemName;
     private Double itemPrice;
     private List<MultipartFile> photos;
@@ -53,6 +57,38 @@ public class SellOrderForm {
 
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
+    }
+
+    public String getShippingCountry() {
+        return shippingCountry;
+    }
+
+    public void setShippingCountry(String shippingCountry) {
+        this.shippingCountry = shippingCountry;
+    }
+
+    public String getShippingCity() {
+        return shippingCity;
+    }
+
+    public void setShippingCity(String shippingCity) {
+        this.shippingCity = shippingCity;
+    }
+
+    public String getShippingState() {
+        return shippingState;
+    }
+
+    public void setShippingState(String shippingState) {
+        this.shippingState = shippingState;
+    }
+
+    public String getShippingZip() {
+        return shippingZip;
+    }
+
+    public void setShippingZip(String shippingZip) {
+        this.shippingZip = shippingZip;
     }
 
     public String getItemName() {
