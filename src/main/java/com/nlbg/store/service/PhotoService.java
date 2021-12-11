@@ -33,7 +33,7 @@ public class PhotoService {
     private final Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dxoa7bbix",
             "api_key", "161649288458746",
-            "api_secret", "eujBGLpb3B30KuJDbUcVOWAp3oA"
+            "api_secret", ""
             ));
 
     public Photo uploadImage(String url, String publicId, Item item, String photoType) throws IOException {
