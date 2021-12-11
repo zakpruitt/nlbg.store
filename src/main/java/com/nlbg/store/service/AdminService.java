@@ -10,10 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService implements UserDetailsService {
 
+    private final String USER_NOT_FOUND = "User with email %s not found.";
     @Autowired
     private AdminRepository adminRepository;
-
-    private final String USER_NOT_FOUND = "User with email %s not found.";
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

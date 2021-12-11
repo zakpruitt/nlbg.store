@@ -1,8 +1,8 @@
 package com.nlbg.store.service;
 
 import com.nlbg.store.domain.Token.ConfirmationToken;
-import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.domain.Token.RegistrationRequest;
+import com.nlbg.store.domain.User.Customer;
 import com.nlbg.store.email.EmailSender;
 import com.nlbg.store.security.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;

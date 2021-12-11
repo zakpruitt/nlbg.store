@@ -5,7 +5,6 @@ import com.nlbg.store.domain.Raffle.RaffleCustomer;
 import com.nlbg.store.domain.Raffle.RaffleDetail;
 import com.nlbg.store.domain.Raffle.RaffleExport;
 import com.nlbg.store.domain.User.Customer;
-import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.service.CustomerService;
 import com.nlbg.store.service.RaffleService;
 import com.nlbg.store.service.ShoppingCartService;
@@ -16,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 @Controller
 @RequestMapping(path = "/raffles")

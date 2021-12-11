@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -36,8 +35,6 @@ public class ItemService {
         items.forEach(item -> itemPrice.put(item.getItemName(), item.getItemDesiredValue()));
         return itemPrice;
     }
-
-
 
 
 }

@@ -16,14 +16,13 @@ import java.util.UUID;
 @Service
 public class CustomerService implements UserDetailsService {
 
+    private final String USER_NOT_FOUND = "User with email %s not found.";
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private ConfirmationTokenService confirmationTokenService;
-
-    private final String USER_NOT_FOUND = "User with email %s not found.";
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -38,18 +37,18 @@ public class CustomerService implements UserDetailsService {
     }
 
     public String signUpUser(Customer customer) {
-       boolean userExists = customerRepository
-               .findByEmail(customer.getEmail())
-               .isPresent();
+        boolean userExists = customerRepository
+                .findByEmail(customer.getEmail())
+                .isPresent();
 
-       if (userExists) {
-           throw new IllegalStateException("Email already taken");
-       }
+        if (userExists) {
+            throw new IllegalStateException("Email already taken");
+        }
 
-       String encodedPassword = bCryptPasswordEncoder.encode(customer.getPassword());
-       customer.setPassword(encodedPassword);
+        String encodedPassword = bCryptPasswordEncoder.encode(customer.getPassword());
+        customer.setPassword(encodedPassword);
 
-       customerRepository.save(customer);
+        customerRepository.save(customer);
 
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
@@ -59,7 +58,7 @@ public class CustomerService implements UserDetailsService {
                 customer
         );
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-       return token;
+        return token;
     }
 
     public int enableCustomer(String email) {

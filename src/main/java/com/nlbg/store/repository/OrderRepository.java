@@ -1,8 +1,6 @@
 package com.nlbg.store.repository;
 
 import com.nlbg.store.domain.Order.Order;
-import com.nlbg.store.domain.Raffle.RaffleCustomer;
-import com.nlbg.store.domain.User.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

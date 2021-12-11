@@ -1,11 +1,9 @@
 package com.nlbg.store.controller;
 
-import com.nlbg.store.domain.Item.Item;
 import com.nlbg.store.domain.Order.Order;
 import com.nlbg.store.domain.Order.PaypalOrderForm;
 import com.nlbg.store.domain.Order.SellOrderForm;
 import com.nlbg.store.domain.User.Customer;
-import com.nlbg.store.repository.CustomerRepository;
 import com.nlbg.store.service.CustomerService;
 import com.nlbg.store.service.ItemService;
 import com.nlbg.store.service.OrderService;
@@ -13,14 +11,11 @@ import com.nlbg.store.service.ShoppingCartService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Hashtable;
@@ -73,13 +68,13 @@ public class OrderController {
     }
 
     @PostMapping("/pay")
-    public String facilitatePayment(@ModelAttribute("paypalOrderForm")PaypalOrderForm paypalOrderForm) {
+    public String facilitatePayment(@ModelAttribute("paypalOrderForm") PaypalOrderForm paypalOrderForm) {
         try {
             Payment payment = orderService.createPayment(
                     paypalOrderForm,
                     "http://localhost:8080/orders/cancel",
                     "http://localhost:8080/orders/success"
-                    );
+            );
             for (Links link : payment.getLinks()) {
                 if (link.getRel().equals("approval_url")) {
                     return "redirect:" + link.getHref();
